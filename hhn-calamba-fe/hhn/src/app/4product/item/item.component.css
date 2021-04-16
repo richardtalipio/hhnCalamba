@@ -1,0 +1,18 @@
+table {
+    width: 100%;
+}
+    
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-column-itemName, .mat-column-category, .mat-column-srp, .mat-column-delete{
+    text-align: center;
+    width: 25% !important;
+}
+
+::ng-deep .mat-sort-header-container {
+    display:flex;
+    justify-content:center;
+  }

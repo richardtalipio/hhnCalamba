@@ -1,0 +1,36 @@
+<form [formGroup] = "itemForm" *ngIf="itemForm">
+    <div class="container" style="width: 600px;">
+        <mat-form-field appearance="standard" style="width: 100%">
+            <mat-label>Item Name</mat-label>
+            <input formControlName="itemName" matInput placeholder="Ex. Hand Sanitizer" />
+        </mat-form-field> <br>
+        <mat-form-field appearance="standard" style="width: 48%">
+            <mat-label>Variant</mat-label>
+            <input formControlName="variant" matInput />
+        </mat-form-field> &nbsp;
+        <mat-form-field appearance="standard" style="width: 48%">
+            <mat-label>Item Category</mat-label>
+            <input type="text" matInput formControlName="category"
+            [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let category of itemCategories | async" [value]="category">
+                  {{category}}
+                </mat-option>
+              </mat-autocomplete>
+        </mat-form-field><br>
+        <mat-form-field appearance="standard"  style="width: 48%">
+            <mat-label>Size</mat-label>
+            <input formControlName="size" matInput />
+        </mat-form-field>&nbsp;
+        <mat-form-field appearance="standard" style="width: 48%">
+            <mat-label>SRP</mat-label>
+            <input formControlName="srp" matInput class="example-right-align"  keypress="return String.fromCharCode(event.charCode).match(/[^a-zA-Z0-9]/g) === null">
+        </mat-form-field>&nbsp;
+       
+
+    </div>
+    <mat-dialog-actions align="end">
+        <button mat-button [mat-dialog-close]="itemForm.value" [disabled]="!itemForm.valid" >Confirm</button>
+        <button mat-button [mat-dialog-close]="false">Cancel</button>
+    </mat-dialog-actions>
+</form>
