@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { ItemComponent } from './item/item.component';
-import { BundleComponent } from './bundle/bundle.component';
+import { PromoComponent } from './promo/promo.component';
 import { ProductRoutingModule } from "./product.routing.module";
 import { MatSelectModule } from '@angular/material/select'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +18,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ItemDetailsPopupComponent } from './popup/item-details-popup/item-details-popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeletePopupComponent } from './popup/delete-popup/delete-popup.component';
+import { PromoDetailsComponent } from './popup/promo-details/promo-details.component';
+import { MatStepperModule }  from '@angular/material/stepper'; 
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
     imports: [ProductRoutingModule,
@@ -34,9 +38,12 @@ import { DeletePopupComponent } from './popup/delete-popup/delete-popup.componen
         MatSortModule,
         CommonModule,
         MatAutocompleteModule,
-        MatDialogModule
+        MatDialogModule,
+        MatStepperModule,
+        MatChipsModule,
+        MatSlideToggleModule
     ],
-    declarations: [ItemComponent, BundleComponent, ItemDetailsPopupComponent, DeletePopupComponent],
+    declarations: [ItemComponent, PromoComponent, ItemDetailsPopupComponent, DeletePopupComponent, PromoDetailsComponent],
     exports: []
 })
 export class ProductModule { }

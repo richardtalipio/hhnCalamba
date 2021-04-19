@@ -1,0 +1,50 @@
+<br>
+<br>
+<div class="container" style="text-align: right;">
+    <button mat-raised-button color="primary" (click)="openPromoDetails()">Add New Promo</button> &nbsp;
+    <button mat-raised-button color="primary" (click)="redirectToItems()">View Items</button>
+</div>
+
+<div class="container">
+    <mat-form-field>
+        <mat-label>Search for promos</mat-label>
+        <input matInput [(ngModel)]="filter" (keyup)="doFilter($event.target.value)" #input />
+    </mat-form-field>
+    <div class="mat-elevation-z8">
+
+        <table mat-table [dataSource]="dataSource" matSort matSortActive="promoName" matSortDisableClear
+            matSortDirection="asc">
+
+            <ng-container matColumnDef="promoName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Promo Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.promoName}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="promoPrice">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Promo Price </th>
+                <td mat-cell *matCellDef="let row"> {{row.promoPrice}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Active Promos</th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-slide-toggle color="accent" [checked]="row.active" (change)="onToggle(row)">
+                    </mat-slide-toggle>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef> Delete </th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-icon-button color="warn" (click)="deletePromo(row)">
+                        <mat-icon class="mat-18">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+    <mat-paginator [length]="resultsLength" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

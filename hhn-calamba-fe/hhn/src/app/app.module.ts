@@ -19,6 +19,7 @@ import { MatListModule } from '@angular/material/list';
 
 import { CustomerOrderComponent } from './3customer-order/customer-order.component';
 import { FormsModule } from '@angular/forms';
+import { ItemMenuPopupComponent } from './popup/item-menu-popup/item-menu-popup.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     ReportComponent,
     NotFoundComponent,
-    CustomerOrderComponent
+    CustomerOrderComponent,
+    ItemMenuPopupComponent
   ],
   imports: [
     HttpClientModule,

@@ -162,8 +162,8 @@ export class ItemComponent implements AfterViewInit {
     });
   }
 
-  redirectToBundles(){
-    this.router.navigate(['products/bundles']);
+  redirectToPromos(){
+    this.router.navigate(['products/promos']);
   }
 
 }

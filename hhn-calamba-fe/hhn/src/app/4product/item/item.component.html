@@ -2,11 +2,9 @@
 <br>
 <div class="container" style="text-align: right;">
     <button mat-raised-button color="primary" (click)="newItemEvent()">Add New Item</button> &nbsp;
-    <button mat-raised-button color="primary" (click)="redirectToBundles()">View Bundles</button>
+    <button mat-raised-button color="primary" (click)="redirectToPromos()">View Promos</button>
 </div>
 <div class="container">
-
-
     <mat-form-field>
         <mat-label>Search for items</mat-label>
         <input matInput [(ngModel)]="filter" (keyup)="doFilter($event.target.value)" placeholder="Ex. Hand Salve"
@@ -46,5 +44,5 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="getRecord(row)"></tr>
         </table>
     </div>
-    <mat-paginator [length]="resultsLength" [pageSize]="5" [pageSizeOptions]="[2, 5, 10, 25, 100]"></mat-paginator>
+    <mat-paginator [length]="resultsLength" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>

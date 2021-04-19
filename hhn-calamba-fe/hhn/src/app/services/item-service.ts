@@ -26,4 +26,8 @@ export class ItemService {
     deleteItemData(item: ItemData): any{
         return  this.http.post<ItemData>('api/item/deleteItemData', item);
     }
+
+    getAllItems():  Observable<any>{
+        return this.http.get<any>('api/item/getAllItems');
+    }
 }

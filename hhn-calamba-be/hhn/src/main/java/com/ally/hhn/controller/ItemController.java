@@ -1,5 +1,7 @@
 package com.ally.hhn.controller;
 
+import java.util.List;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -47,5 +49,10 @@ public class ItemController {
 	public ResponseEntity<JSONObject> deleteItemData(@RequestBody Item item) {
 		itemService.delete(item);
 		return getItemTableData(0, "itemName", "asc", 5, "");
+	}
+	
+	@GetMapping("/getAllItems")
+	public List<Item> getAllItems(){
+		return itemService.getAllItems();
 	}
 }

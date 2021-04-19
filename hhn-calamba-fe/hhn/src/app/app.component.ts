@@ -19,9 +19,13 @@ export class AppComponent {
         link: './home',
         index: 0
       },{
+        label: 'Branch Orders',
+        link: './branch-order',
+        index: 1
+      },{
         label: 'Products',
         link: './products',
-        index: 1
+        index: 2
       }
     ];
   }

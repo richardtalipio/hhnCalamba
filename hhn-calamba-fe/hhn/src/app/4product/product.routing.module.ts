@@ -1,15 +1,16 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { BundleComponent } from "./bundle/bundle.component";
+import { PromoComponent } from "./promo/promo.component";
 import { ItemComponent } from "./item/item.component";
 import { ProductComponent } from "./product.component";
+import { PromoDetailsComponent } from "./popup/promo-details/promo-details.component";
 
 const productCatalogueRoutes: Routes = [
     {
         path: '', component: ProductComponent, children: [
             { path: 'items', component: ItemComponent },
-            { path: 'bundles', component: BundleComponent },
-            { path: '', redirectTo: 'items', pathMatch: 'full' },
+            { path: 'promos', component: PromoComponent },
+            { path: '', redirectTo: 'promos', pathMatch: 'full' },
         ]
     }];
 

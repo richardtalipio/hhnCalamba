@@ -53,4 +53,9 @@ public class ItemService {
 	public void delete(Item item) {
 		itemRepository.delete(item);
 	}
+	
+	public List<Item> getAllItems(){
+		return itemRepository.findAll();
+	}
+	
 }

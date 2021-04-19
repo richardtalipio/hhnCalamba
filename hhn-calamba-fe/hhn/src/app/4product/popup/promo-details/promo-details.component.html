@@ -1,0 +1,73 @@
+<div style="width: 1000px;">
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Choose items for promo</ng-template>
+      <mat-form-field class="example-chip-list">
+        <mat-label>Promo Items</mat-label>
+        <mat-chip-list #chipList aria-label="Item selection">
+          <mat-chip *ngFor="let item of items" [selectable]="selectable" [removable]="removable"
+            (removed)="remove(item.itemName)">
+            {{item.itemName}} {{item.size}}
+            <span *ngIf="item.variant!='' && item.variant!=undefined">&nbsp;({{item.variant}})</span>
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="New item..." #itemInput [formControl]="itemCtrl" [matAutocomplete]="auto"
+            [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let item of filteredItems | async" [value]="item">
+            {{item.itemName}} {{item.size}}
+            <span *ngIf="item.variant!='' && item.variant!=undefined">&nbsp;({{item.variant}})</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div style="text-align: right;">
+        <button mat-button matStepperNext (click)="createPromoItem()">Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Configure prices</ng-template>
+      <div style="text-align: center;" *ngFor="let promoItem of promoItemLists.controls; index as i">
+        <ng-container [formGroup]="promoItem">
+          <mat-form-field appearance="standard" style="width: 35%;">
+            <mat-label>Item Name</mat-label>
+            <input formControlName="promoItemName" matInput readonly="true" />
+          </mat-form-field> &nbsp;
+          <mat-form-field appearance="standard" style="width: 19%;">
+            <mat-label>Quantity</mat-label>
+            <input formControlName="quantity" matInput (ngModelChange)="onQuantityChange(i)" />
+          </mat-form-field> &nbsp;
+          <mat-form-field appearance="standard" style="width: 19%;">
+            <mat-label>Old Price</mat-label>
+            <span matPrefix>&#8369;&nbsp;</span>
+            <input formControlName="oldPrice" matInput readonly="true" />
+          </mat-form-field> &nbsp;
+          <mat-form-field appearance="standard" style="width: 20%;">
+            <mat-label>New Price</mat-label>
+            <span matPrefix>&#8369;&nbsp;</span>
+            <input formControlName="itemPrice" matInput />
+          </mat-form-field>
+        </ng-container>
+
+      </div>
+      <div style="text-align: center;">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext (click)="createPromo()">Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Review and Confirm</ng-template>
+      <div style="text-align: center;">
+        Created Promo<br>
+        <label>{{promo.promoName}}</label><br>
+        Promo price<br>
+        <label>&#8369;{{promo.promoPrice}}</label>
+      </div>
+      <div style="text-align: center;">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button [mat-dialog-close]="{promo: promo, promoItemList: promoItemLists.value}" >Confirm</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

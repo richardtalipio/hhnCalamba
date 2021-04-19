@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+}
+    
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-column-promoPrice, .mat-column-active, .mat-column-delete{
+    text-align: center;
+    width: 20% !important;
+}
+
+.mat-column-promoName{
+    text-align: center;
+    width: 40% !important;
+}
+
+::ng-deep .mat-sort-header-container {
+    display:flex;
+    justify-content:center;
+  }

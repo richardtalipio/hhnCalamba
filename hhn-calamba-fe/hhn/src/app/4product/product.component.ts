@@ -13,6 +13,6 @@ export class ProductComponent implements OnInit {
   
   
   ngOnInit(): void {
-    this.router.navigate(['products/items']);
   }
+  
 }

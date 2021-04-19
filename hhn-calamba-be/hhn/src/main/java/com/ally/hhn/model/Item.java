@@ -29,7 +29,7 @@ public class Item {
 	private String category;
 	
 	@Column(name = "srp")
-	private String srp;
+	private float srp;
 
 	public Integer getItemId() {
 		return itemId;
@@ -71,11 +71,11 @@ public class Item {
 		this.category = category;
 	}
 
-	public String getSrp() {
+	public float getSrp() {
 		return srp;
 	}
 
-	public void setSrp(String srp) {
+	public void setSrp(float srp) {
 		this.srp = srp;
 	}
 	
