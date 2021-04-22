@@ -23,6 +23,10 @@ export class AppComponent {
         link: './branch-order',
         index: 1
       },{
+        label: 'Customer Orders',
+        link: './customer-order',
+        index: 1
+      },{
         label: 'Products',
         link: './products',
         index: 2

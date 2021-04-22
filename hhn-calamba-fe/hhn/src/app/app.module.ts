@@ -16,10 +16,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet'; 
 import { MatListModule } from '@angular/material/list';
-
 import { CustomerOrderComponent } from './3customer-order/customer-order.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemMenuPopupComponent } from './popup/item-menu-popup/item-menu-popup.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { BranchOrderDetailsComponent } from './2branch-order/popup/branch-order-details/branch-order-details.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatStepperModule }  from '@angular/material/stepper'; 
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'; 
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -30,7 +42,8 @@ import { ItemMenuPopupComponent } from './popup/item-menu-popup/item-menu-popup.
     ReportComponent,
     NotFoundComponent,
     CustomerOrderComponent,
-    ItemMenuPopupComponent
+    ItemMenuPopupComponent,
+    BranchOrderDetailsComponent
   ],
   imports: [
     HttpClientModule,
@@ -40,11 +53,24 @@ import { ItemMenuPopupComponent } from './popup/item-menu-popup/item-menu-popup.
     MatTabsModule,
     MatSelectModule,
     FormsModule,
+    ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
     MatBottomSheetModule,
     MatListModule,
-    CommonModule
+    CommonModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    MatDialogModule,
+    MatStepperModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule,
+    MatCardModule
   ],
   exports: [
     MatSelectModule,

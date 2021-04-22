@@ -7,8 +7,8 @@ import { PromoData } from 'src/app/model/promo-data';
 import { PromoService } from 'src/app/services/promo-service';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of } from 'rxjs';
-import { PromoDetailsComponent } from '../popup/promo-details/promo-details.component';
 import { DeletePopupComponent } from '../popup/delete-popup/delete-popup.component';
+import { ItemService } from 'src/app/services/item-service';
 
 @Component({
   selector: 'app-promo',
@@ -28,7 +28,7 @@ export class PromoComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['promoName', 'promoPrice', 'active', 'delete'];
 
-  constructor(private promoService: PromoService,
+  constructor(private promoService: PromoService, private itemService: ItemService,
     public dialog: MatDialog,
     private router: Router) { }
 
@@ -65,30 +65,32 @@ export class PromoComponent implements AfterViewInit {
   }
 
   openPromoDetails() {
-    const dialogRef = this.dialog.open(PromoDetailsComponent, {
-      data: new PromoData
-    });
+    this.itemService.setSelectedItems([]);
+    this.router.navigate(['products/promos/new-promo']);
+    // const dialogRef = this.dialog.open(PromoDetailsComponent, {
+    //   data: new PromoData
+    // });
 
-    dialogRef.afterClosed().subscribe(promoDTO => {
-      if (promoDTO) {
-        this.isLoadingResults = true;
-        this.promoService.postPromoData(promoDTO).subscribe({
-          next: data => {
-            this.dataSource = data.promoList;
-            this.resultsLength = data.promoCount;
-            this.paginator.pageIndex = 0;
-            this.paginator.pageSize = 5;
-            this.sort.active = "promoName";
-            this.sort.direction = "asc";
-            this.isLoadingResults = false;
-            this.isRateLimitReached = false;
-          },
-          error: error => {
-            console.log(error);
-          }
-        });
-      }
-    });
+    // dialogRef.afterClosed().subscribe(promoDTO => {
+    //   if (promoDTO) {
+    //     this.isLoadingResults = true;
+    //     this.promoService.postPromoData(promoDTO).subscribe({
+    //       next: data => {
+    //         this.dataSource = data.promoList;
+    //         this.resultsLength = data.promoCount;
+    //         this.paginator.pageIndex = 0;
+    //         this.paginator.pageSize = 5;
+    //         this.sort.active = "promoName";
+    //         this.sort.direction = "asc";
+    //         this.isLoadingResults = false;
+    //         this.isRateLimitReached = false;
+    //       },
+    //       error: error => {
+    //         console.log(error);
+    //       }
+    //     });
+    //   }
+    // });
 
 
   }

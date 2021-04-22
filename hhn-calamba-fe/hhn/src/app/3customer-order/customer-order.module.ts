@@ -1,7 +1,5 @@
 import { NgModule } from "@angular/core";
-import { ItemComponent } from './item/item.component';
-import { PromoComponent } from './promo/promo.component';
-import { ProductRoutingModule } from "./product.routing.module";
+import { CustomerOrderRoutingModule } from "./customer-order.routing.module";
 import { MatSelectModule } from '@angular/material/select'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,20 +13,16 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatAutocompleteModule } from '@angular/material/autocomplete'; 
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
-import { ItemDetailsPopupComponent } from './popup/item-details-popup/item-details-popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DeletePopupComponent } from './popup/delete-popup/delete-popup.component';
 import { MatStepperModule }  from '@angular/material/stepper'; 
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { PromoNewComponent } from './promo-new/promo-new.component';
+import { ItemMenuComponent } from './item-menu/item-menu.component';
 import { MatCardModule } from '@angular/material/card';
-import { PromoPricesComponent } from './promo-prices/promo-prices.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-    imports: [ProductRoutingModule,
+    imports: [CustomerOrderRoutingModule,
         MatSelectModule,
         MatFormFieldModule,
         MatButtonModule,
@@ -47,10 +41,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         MatChipsModule,
         MatSlideToggleModule,
         MatCardModule,
-        MatCheckboxModule
+        MatTooltipModule
         
     ],
-    declarations: [ItemComponent, PromoComponent, ItemDetailsPopupComponent, DeletePopupComponent, PromoNewComponent, PromoPricesComponent],
+    declarations: [ItemMenuComponent],
     exports: []
 })
-export class ProductModule { }
+export class CustomerOrderModule { }

@@ -31,7 +31,7 @@ public class PromoItem {
     private Item item;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="promo_id", nullable=false)
+    @JoinColumn(name="promo_id")
     private Promo promo;
 
 	public Integer getPromoItemId() {

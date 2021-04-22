@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { ItemData } from "../model/item-data";
 
 @Injectable({
@@ -29,5 +29,12 @@ export class ItemService {
 
     getAllItems():  Observable<any>{
         return this.http.get<any>('api/item/getAllItems');
+    }
+
+    private selectedItemSource = new BehaviorSubject([]);
+    selectedItems = this.selectedItemSource.asObservable();
+
+    setSelectedItems(newSelectedList: ItemData[]) {
+        this.selectedItemSource.next(newSelectedList);
     }
 }

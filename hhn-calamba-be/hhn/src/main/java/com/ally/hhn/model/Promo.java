@@ -29,6 +29,9 @@ public class Promo {
 	
 	@Column(name = "promo_price")
 	private float promoPrice;
+	
+	@Column(name = "included_items")
+	private String includedItems;
 
 	public Integer getPromoId() {
 		return promoId;
@@ -44,14 +47,6 @@ public class Promo {
 
 	public void setPromoName(String promoName) {
 		this.promoName = promoName;
-	}
-
-	public float getPromo_price() {
-		return promoPrice;
-	}
-
-	public void setPromo_price(float promo_price) {
-		this.promoPrice = promo_price;
 	}
 
 	public float getPromoPrice() {
@@ -70,6 +65,16 @@ public class Promo {
 		this.isActive = isActive;
 	}
 	
+	
+	
+	public String getIncludedItems() {
+		return includedItems;
+	}
+
+	public void setIncludedItems(String includedItems) {
+		this.includedItems = includedItems;
+	}
+
 	@Override
 	public String toString() {
 		return "Promo Id: " +promoId+

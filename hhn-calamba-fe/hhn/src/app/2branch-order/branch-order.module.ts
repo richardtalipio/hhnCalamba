@@ -1,7 +1,4 @@
 import { NgModule } from "@angular/core";
-import { ItemComponent } from './item/item.component';
-import { PromoComponent } from './promo/promo.component';
-import { ProductRoutingModule } from "./product.routing.module";
 import { MatSelectModule } from '@angular/material/select'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,20 +12,21 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatAutocompleteModule } from '@angular/material/autocomplete'; 
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
-import { ItemDetailsPopupComponent } from './popup/item-details-popup/item-details-popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DeletePopupComponent } from './popup/delete-popup/delete-popup.component';
 import { MatStepperModule }  from '@angular/material/stepper'; 
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { PromoNewComponent } from './promo-new/promo-new.component';
 import { MatCardModule } from '@angular/material/card';
-import { PromoPricesComponent } from './promo-prices/promo-prices.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { BranchOrderRoutingModule } from "./branch-order.routing.module";
+import { NewBranchOrderComponent } from './new-branch-order/new-branch-order.component';
+import { BranchOrderListComponent } from './branch-order-list/branch-order-list.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { BranchOrderPricesComponent } from './branch-order-prices/branch-order-prices.component';
 
 @NgModule({
-    imports: [ProductRoutingModule,
+    imports: [BranchOrderRoutingModule,
         MatSelectModule,
         MatFormFieldModule,
         MatButtonModule,
@@ -47,10 +45,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         MatChipsModule,
         MatSlideToggleModule,
         MatCardModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatDatepickerModule,
+        MatNativeDateModule
         
     ],
-    declarations: [ItemComponent, PromoComponent, ItemDetailsPopupComponent, DeletePopupComponent, PromoNewComponent, PromoPricesComponent],
+    declarations: [NewBranchOrderComponent, BranchOrderListComponent, BranchOrderPricesComponent],
     exports: []
+
 })
-export class ProductModule { }
+export class BranchOrderModule { }

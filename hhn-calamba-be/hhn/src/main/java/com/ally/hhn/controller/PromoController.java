@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ally.hhn.model.Item;
 import com.ally.hhn.model.Promo;
-import com.ally.hhn.model.PromoDTO;
+import com.ally.hhn.model.PromoJSON;
 import com.ally.hhn.service.PromoService;
 
 @RestController
@@ -34,7 +34,7 @@ public class PromoController {
 	}
 	
 	@PostMapping("/postPromoData")
-	public ResponseEntity<JSONObject> postItemData(@RequestBody PromoDTO promoDTO) {
+	public ResponseEntity<JSONObject> postItemData(@RequestBody PromoJSON promoDTO) {
 		promoService.save(promoDTO);
 		return getPromoTableData(0, "promoName", "asc", 5, "");
 	}
