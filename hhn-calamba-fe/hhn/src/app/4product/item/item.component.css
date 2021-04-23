@@ -6,10 +6,13 @@ table {
     font-size: 14px;
     width: 100%;
 }
-
-.mat-column-itemName, .mat-column-category, .mat-column-srp, .mat-column-delete{
+.mat-column-itemName{
     text-align: center;
-    width: 25% !important;
+    width: 30% !important;
+}
+.mat-column-category, .mat-column-srp, .mat-column-stocksLeft, .mat-column-delete{
+    text-align: center;
+    width: 17.5% !important;
 }
 
 ::ng-deep .mat-sort-header-container {

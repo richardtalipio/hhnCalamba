@@ -25,7 +25,7 @@ public class ProductController {
 	@GetMapping("/getAllProducts")
 	public HashMap<String, Object> getProducts(){
 		HashMap<String, Object> products = new HashMap<String, Object>();
-		products.put("items", itemService.getAllItems());
+		products.put("items", itemService.getAllItems(false));
 		products.put("promos", promoService.getAllPromos());
 		return products;
 	}

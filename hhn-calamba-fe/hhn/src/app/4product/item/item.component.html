@@ -32,6 +32,11 @@
                 <td mat-cell *matCellDef="let row"> {{row.srp}} </td>
             </ng-container>
 
+            <ng-container matColumnDef="stocksLeft">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Stocks Left </th>
+                <td mat-cell *matCellDef="let row"> {{row.stocksLeft}} </td>
+            </ng-container>
+
             <ng-container matColumnDef="delete">
                 <th mat-header-cell *matHeaderCellDef> Delete </th>
                 <td mat-cell *matCellDef="let row">

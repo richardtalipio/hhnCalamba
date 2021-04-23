@@ -31,6 +31,9 @@ public class Promo {
 	@Column(name = "promo_price")
 	private float promoPrice;
 	
+	@Column(name = "stocks_left")
+	private float stocksLeft;
+	
 	@Column(name = "included_items")
 	private String includedItems;
 
@@ -74,6 +77,22 @@ public class Promo {
 
 	public void setIncludedItems(String includedItems) {
 		this.includedItems = includedItems;
+	}
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public float getStocksLeft() {
+		return stocksLeft;
+	}
+
+	public void setStocksLeft(float stocksLeft) {
+		this.stocksLeft = stocksLeft;
 	}
 
 	@Override

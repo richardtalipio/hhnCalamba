@@ -8,5 +8,6 @@ export class PromoData{
     promoPrice;
     active;
     includedItems;
+    stocksLeft; 
     promoItemList: PromoItemData[];
 }

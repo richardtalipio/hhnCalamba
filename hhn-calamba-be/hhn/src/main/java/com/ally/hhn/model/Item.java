@@ -30,6 +30,9 @@ public class Item {
 	
 	@Column(name = "srp")
 	private float srp;
+	
+	@Column(name = "stocks_left")
+	private float stocksLeft;
 
 	public Integer getItemId() {
 		return itemId;
@@ -78,7 +81,15 @@ public class Item {
 	public void setSrp(float srp) {
 		this.srp = srp;
 	}
-	
-	
 
+	public float getStocksLeft() {
+		return stocksLeft;
+	}
+
+	public void setStocksLeft(float stocksLeft) {
+		this.stocksLeft = stocksLeft;
+	}
+	
+	
+	
 }

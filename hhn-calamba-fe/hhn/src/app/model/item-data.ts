@@ -6,4 +6,5 @@ export class ItemData {
     size;
     category;
     srp;
+    stocksLeft;
 }

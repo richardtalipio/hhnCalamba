@@ -7,9 +7,9 @@ table {
     width: 100%;
 }
 
-.mat-column-promoPrice, .mat-column-active, .mat-column-delete{
+.mat-column-promoPrice, .mat-column-active, .mat-column-stocksLeft , .mat-column-delete{
     text-align: center;
-    width: 20% !important;
+    width: 15% !important;
 }
 
 .mat-column-promoName{

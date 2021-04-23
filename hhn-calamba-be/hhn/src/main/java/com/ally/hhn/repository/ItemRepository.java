@@ -22,4 +22,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 	@Query("SELECT DISTINCT I.category FROM Item I")
 	List<String> findAllItemCategory();
+	
+	@Query("SELECT I FROM Item I where I.stocksLeft != 0")
+	List<Item> findAllWithStock();
 }

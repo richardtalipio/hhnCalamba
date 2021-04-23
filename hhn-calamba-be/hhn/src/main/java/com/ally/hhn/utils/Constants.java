@@ -6,4 +6,7 @@ public class Constants {
 	public static String CLOSED = "CLOSED";
 	public static String DELIVERY = "Pending Delivery";
 	public static String PAYMENT = "Pending Payment";
-	public static String NEW_ORDER = "New Order";}
+	public static String NEW_ORDER = "New Order";
+	public static String AVAILABLE = "available";
+	public static String ACTIVE = "active";
+}

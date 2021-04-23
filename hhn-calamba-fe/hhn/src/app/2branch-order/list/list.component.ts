@@ -75,6 +75,7 @@ export class ListComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.isLoadingResults = true;
+        this.excludeClosed = false;
         this.branchOrderService.boListObs.subscribe({
           next: (data:any) => {
             this.dataSource = data.branchOrderList;

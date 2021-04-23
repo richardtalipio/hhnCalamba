@@ -34,7 +34,6 @@ export class BranchOrderService{
     boListObs = this.boList$.asObservable();
 
     setBoList(newBOList:{}) {
-        console.log(newBOList);
         this.boList$.next(newBOList);
     }
 }

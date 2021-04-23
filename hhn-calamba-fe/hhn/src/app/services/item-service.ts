@@ -27,8 +27,8 @@ export class ItemService {
         return  this.http.post<ItemData>('api/item/deleteItemData', item);
     }
 
-    getAllItems():  Observable<any>{
-        return this.http.get<any>('api/item/getAllItems');
+    getAllItems(withStock: boolean):  Observable<any>{
+        return this.http.get<any>('api/item/getAllItems?withStock='+withStock);
     }
 
     private selectedItemSource = new BehaviorSubject([]);

@@ -52,7 +52,7 @@ public class ItemController {
 	}
 	
 	@GetMapping("/getAllItems")
-	public List<Item> getAllItems(){
-		return itemService.getAllItems();
+	public List<Item> getAllItems(@RequestParam(defaultValue = "false") String withStock){
+		return itemService.getAllItems(Boolean.parseBoolean(withStock));
 	}
 }

@@ -26,7 +26,7 @@ export class ItemComponent implements AfterViewInit {
   isLoadingResults = true;
   isRateLimitReached = true;
 
-  displayedColumns: string[] = ['itemName', 'category', 'srp', 'delete'];
+  displayedColumns: string[] = ['itemName', 'category', 'srp', 'stocksLeft', 'delete'];
 
   constructor(private itemService: ItemService,
     public dialog: MatDialog,

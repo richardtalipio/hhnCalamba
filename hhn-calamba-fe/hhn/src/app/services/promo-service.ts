@@ -44,4 +44,8 @@ export class PromoService {
     setSelectedPromoItem(array: PromoItemData[] ){
         this.selectedPromoItem$.next(array);
     }
+
+    getPromoItemListData(promoData: PromoData): Observable<any>{
+        return  this.http.post<PromoData>('api/promo/getPromoItemListData', promoData);
+    }
 }

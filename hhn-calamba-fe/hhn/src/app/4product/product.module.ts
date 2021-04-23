@@ -27,6 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { PromoDraftComponent } from './promo-draft/promo-draft.component';
 import { PromoConfigComponent } from './popup/promo-config/promo-config.component';
 import { PromoDetailsComponent } from './popup/promo-details/promo-details.component';
+import { PromoViewComponent } from './popup/promo-view/promo-view.component';
 
 
 @NgModule({
@@ -52,7 +53,7 @@ import { PromoDetailsComponent } from './popup/promo-details/promo-details.compo
         MatCheckboxModule
         
     ],
-    declarations: [ItemComponent, PromoComponent, ItemDetailsPopupComponent, DeletePopupComponent, PromoNewComponent, PromoDraftComponent, PromoConfigComponent, PromoDetailsComponent],
+    declarations: [ItemComponent, PromoComponent, ItemDetailsPopupComponent, DeletePopupComponent, PromoNewComponent, PromoDraftComponent, PromoConfigComponent, PromoDetailsComponent, PromoViewComponent],
     exports: []
 })
 export class ProductModule { }

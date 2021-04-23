@@ -17,8 +17,9 @@ public class ItemService {
 
 	@Autowired
 	ItemRepository itemRepository;
-	
-	public JSONObject getItemTableData(Integer pageNumber, String sortColumn, String order, Integer pageSize, String filter) {
+
+	public JSONObject getItemTableData(Integer pageNumber, String sortColumn, String order, Integer pageSize,
+			String filter) {
 
 		Sort sort;
 		if (order.equalsIgnoreCase("ASC")) {
@@ -29,9 +30,9 @@ public class ItemService {
 		Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
 		List<Item> itemList = itemRepository.findByItemName(filter, pageable).getContent();
 		int itemCount;
-		if(filter.isEmpty()) {
+		if (filter.isEmpty()) {
 			itemCount = itemRepository.findAll().size();
-		}else {
+		} else {
 			itemCount = itemRepository.findByItemName(filter).size();
 		}
 		JSONObject json = new JSONObject();
@@ -39,23 +40,27 @@ public class ItemService {
 		json.put("itemCount", itemCount);
 		return json;
 	}
-	
+
 	public JSONObject getItemCategories() {
 		JSONObject json = new JSONObject();
 		json.put("itemCategories", itemRepository.findAllItemCategory());
 		return json;
 	}
-	
+
 	public void save(Item item) {
 		itemRepository.save(item);
 	}
-	
+
 	public void delete(Item item) {
 		itemRepository.delete(item);
 	}
-	
-	public List<Item> getAllItems(){
-		return itemRepository.findAll();
+
+	public List<Item> getAllItems(boolean withStock) {
+		if (withStock) {
+			return itemRepository.findAllWithStock();
+		} else {
+			return itemRepository.findAll();
+		}
 	}
-	
+
 }

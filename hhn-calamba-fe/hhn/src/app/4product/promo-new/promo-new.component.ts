@@ -33,7 +33,7 @@ export class PromoNewComponent implements OnInit, OnDestroy{
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.itemMenuSubscription$ = this.itemService.getAllItems().pipe(
+    this.itemMenuSubscription$ = this.itemService.getAllItems(false).pipe(
       map(itemList => { this.allItems = itemList }),
       switchMap(() => this.promoService.selectedPromoItemObs),
       switchMap(result => {

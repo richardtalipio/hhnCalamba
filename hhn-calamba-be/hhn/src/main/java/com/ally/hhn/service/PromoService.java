@@ -10,12 +10,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.ally.hhn.model.BranchOrder;
 import com.ally.hhn.model.Item;
 import com.ally.hhn.model.Promo;
 import com.ally.hhn.model.PromoDTO;
 import com.ally.hhn.model.PromoItem;
 import com.ally.hhn.repository.PromoItemRepository;
 import com.ally.hhn.repository.PromoRepository;
+import com.ally.hhn.utils.Constants;
 
 @Service
 public class PromoService {
@@ -27,12 +29,18 @@ public class PromoService {
 	PromoItemRepository promoItemRepository;
 	
 	public JSONObject getPromoTableData(Integer pageNumber, String sortColumn, String order, Integer pageSize, String filter) {
+		
+		if(sortColumn.equalsIgnoreCase(Constants.ACTIVE) ){
+			sortColumn = "isActive";
+		}
+		
 		Sort sort;
 		if (order.equalsIgnoreCase("ASC")) {
 			sort = Sort.by(sortColumn).ascending();
 		} else {
 			sort = Sort.by(sortColumn).descending();
 		}
+
 		Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
 		List<Promo> itemList = promoRepository.findByPromoName(filter, pageable).getContent();
 		int promoCount;
@@ -77,5 +85,12 @@ public class PromoService {
 			promoDtoList.add(promoDto);		
 		}
 		return promoDtoList;
+	}
+	
+	public JSONObject getPromoItemList(Promo promo) {
+		List<PromoItem> promoItemList = promoItemRepository.findByPromoId(promo.getPromoId());
+		JSONObject json = new JSONObject();
+		json.put("promoItemList", promoItemList);
+		return json;
 	}
 }

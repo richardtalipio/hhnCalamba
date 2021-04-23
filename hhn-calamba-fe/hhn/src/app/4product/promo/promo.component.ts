@@ -9,6 +9,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of } from 'rxjs';
 import { DeletePopupComponent } from '../popup/delete-popup/delete-popup.component';
 import { ItemService } from 'src/app/services/item-service';
+import { PromoViewComponent } from '../popup/promo-view/promo-view.component';
 
 @Component({
   selector: 'app-promo',
@@ -26,7 +27,7 @@ export class PromoComponent implements AfterViewInit {
   isLoadingResults = true;
   isRateLimitReached = true;
 
-  displayedColumns: string[] = ['promoName', 'promoPrice', 'active', 'delete'];
+  displayedColumns: string[] = ['promoName', 'promoPrice', 'stocksLeft', 'active', 'delete'];
 
   constructor(private promoService: PromoService, private itemService: ItemService,
     public dialog: MatDialog,
@@ -123,6 +124,16 @@ export class PromoComponent implements AfterViewInit {
         console.log(error);
       }
     })
+  }
+
+  viewPromoDetails(row: PromoData){
+    this.promoService.getPromoItemListData(row).subscribe(result => {
+      row.promoItemList = result.promoItemList;
+      const dialogRef = this.dialog.open(PromoViewComponent, {
+        data: row
+      });
+    });
+    
   }
 
 }

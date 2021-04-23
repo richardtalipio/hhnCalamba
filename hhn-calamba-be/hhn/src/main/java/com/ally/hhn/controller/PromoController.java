@@ -53,6 +53,11 @@ public class PromoController {
 		}catch(Exception e) {
 			return new ResponseEntity<JSONObject>(new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+	}
+	
+	@PostMapping("/getPromoItemListData")
+	public ResponseEntity<JSONObject> getPromoItemListData(@RequestBody Promo promo) {
+		JSONObject response = promoService.getPromoItemList(promo);
+		return new ResponseEntity<JSONObject>(response, new HttpHeaders(), HttpStatus.OK);
 	}
 }
