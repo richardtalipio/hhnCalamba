@@ -20,6 +20,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ItemMenuComponent } from './item-menu/item-menu.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CustomerComponent } from './customer/customer.component';
+import { CustomerNewComponent } from './popup/customer-new/customer-new.component';
+import { CustomerOrderListComponent } from './customer-order-list/customer-order-list.component';
 
 @NgModule({
     imports: [CustomerOrderRoutingModule,
@@ -44,7 +47,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatTooltipModule
         
     ],
-    declarations: [ItemMenuComponent],
+    declarations: [ItemMenuComponent, CustomerComponent, CustomerNewComponent, CustomerOrderListComponent],
     exports: []
 })
 export class CustomerOrderModule { }

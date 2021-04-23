@@ -1,0 +1,15 @@
+<form [formGroup] = "customerForm" *ngIf="customerForm">
+    <mat-form-field appearance="standard" style="width: 100%">
+        <mat-label>Customer Name</mat-label>
+        <input formControlName="name" matInput />
+    </mat-form-field> <br>
+    <mat-form-field appearance="standard" style="width: 100%">
+        <mat-label>Mobile Number</mat-label>
+        <input formControlName="mobileNumber" matInput />
+    </mat-form-field> <br>
+
+    <mat-dialog-actions align="end">
+        <button mat-button [mat-dialog-close]="customerForm.value" [disabled]="!customerForm.valid" >Confirm</button>
+        <button mat-button [mat-dialog-close]="false">Cancel</button>
+    </mat-dialog-actions>
+</form>

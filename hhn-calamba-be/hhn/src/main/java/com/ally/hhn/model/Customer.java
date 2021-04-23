@@ -19,6 +19,9 @@ public class Customer {
 	@Column(name = "name")
 	private String name;
 	
+	@Column(name = "mobile_number")
+	private String mobileNumber;
+	
 	@Column(name = "status")
 	private String status;
 
@@ -44,6 +47,14 @@ public class Customer {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
 	
 	

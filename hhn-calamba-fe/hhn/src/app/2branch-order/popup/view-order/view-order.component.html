@@ -2,15 +2,15 @@
 
 <div style=" width: 600px;">
 
-    <table style="width: 100%;">
+    <table id="order">
         <tr>
-            <th class="itemname">Item</th>
-            <th style="text-align: right;">Qty</th>
-            <th style="text-align: right;">Price</th>
+            <th style="text-align: center;">Item</th>
+            <th style="text-align: center;">Quantity</th>
+            <th style="text-align: center;">Price</th>
         </tr>
         <br>
         <tr *ngFor="let product of branchOrderitems; index as i">
-            <td class="itemname">
+            <td >
                 <span *ngIf="product.name!=undefined">
                     <label>{{product.name}}</label>
                     <span *ngIf="product.product.variant!='' && product.product.variant!=undefined">

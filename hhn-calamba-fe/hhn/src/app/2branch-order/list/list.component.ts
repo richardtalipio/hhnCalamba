@@ -28,7 +28,7 @@ export class ListComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['orderDate', 'deliveryDate', 'grandTotal', 'status', 'delete'];
 
-  excludeClosed: boolean = false;
+  excludeClosed: boolean = true;;
   constructor(private branchOrderService: BranchOrderService,
     public dialog: MatDialog,
     private router: Router) { }
@@ -75,7 +75,7 @@ export class ListComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.isLoadingResults = true;
-        this.excludeClosed = false;
+        this.excludeClosed = true;
         this.branchOrderService.boListObs.subscribe({
           next: (data:any) => {
             this.dataSource = data.branchOrderList;
@@ -100,7 +100,7 @@ export class ListComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.isLoadingResults = true;
-        this.excludeClosed = false;
+        this.excludeClosed = true;
         this.branchOrderService.deleteBranchOrderData(data).subscribe({
           next: data => {
             this.dataSource = data.branchOrderList;

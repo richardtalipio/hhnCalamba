@@ -1,0 +1,12 @@
+table {
+    width: 100%;
+}
+    
+::ng-deep .mat-sort-header-container {
+    display:flex;
+    justify-content:center;
+  }
+
+  .mat-column-orderDate, .mat-column-deliveryDate, .mat-column-grandTotal, .mat-column-status, .mat-column-delete{
+      text-align: center;
+  }

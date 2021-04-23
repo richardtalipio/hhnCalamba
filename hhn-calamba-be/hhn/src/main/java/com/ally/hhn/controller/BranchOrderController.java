@@ -26,8 +26,8 @@ public class BranchOrderController {
 	 
 	@GetMapping("/getBranchOrderTableData")
 	public ResponseEntity<JSONObject> getBranchOrderTableData(@RequestParam(defaultValue = "0") Integer page,
-			@RequestParam(defaultValue = "orderDate") String sort, @RequestParam(defaultValue = "asc") String order,
-			@RequestParam(defaultValue = "5") Integer pageSize,  @RequestParam(defaultValue = "") String filter) {
+			@RequestParam(defaultValue = "deliveryDate") String sort, @RequestParam(defaultValue = "asc") String order,
+			@RequestParam(defaultValue = "5") Integer pageSize,  @RequestParam(defaultValue = "true") String filter) {
 		JSONObject response = branchOrderService.getBranchOrderTableData(page, sort, order, pageSize, filter);
 		return new ResponseEntity<JSONObject>(response, new HttpHeaders(), HttpStatus.OK);
 	}
@@ -35,13 +35,13 @@ public class BranchOrderController {
 	@PostMapping("/postBranchOrderData")
 	public ResponseEntity<JSONObject> postBranchOrderData(@RequestBody BranchOrderDTO branchOrderDTO) {
 		branchOrderService.save(branchOrderDTO);
-		return getBranchOrderTableData(0, "orderDate", "asc", 5, "");
+		return getBranchOrderTableData(0, "deliveryDate", "asc", 5, "");
 	}
 	
 	@PostMapping("/deleteBranchOrderData")
 	public ResponseEntity<JSONObject> deleteBranchOrderData(@RequestBody BranchOrder branchOrder) {
 		branchOrderService.delete(branchOrder);
-		return getBranchOrderTableData(0, "orderDate", "asc", 5, "");
+		return getBranchOrderTableData(0, "deliveryDate", "asc", 5, "");
 	}
 	
 	@PostMapping("/getBranchOrderItemData")
@@ -54,7 +54,7 @@ public class BranchOrderController {
 	@PostMapping("/changeStatus")
 	public ResponseEntity<JSONObject> changeStatus(@RequestBody BranchOrder branchOrder) {
 		BranchOrder response = branchOrderService.changeStatus(branchOrder);
-		return getBranchOrderTableData(0, "orderDate", "asc", 5, "");
+		return getBranchOrderTableData(0, "deliveryDate", "asc", 5, "true");
 		
 	}
 
