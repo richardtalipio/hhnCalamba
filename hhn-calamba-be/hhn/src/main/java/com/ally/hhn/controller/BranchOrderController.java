@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ally.hhn.model.BranchOrder;
 import com.ally.hhn.model.BranchOrderDTO;
-import com.ally.hhn.model.PromoJSON;
+import com.ally.hhn.model.Promo;	
 import com.ally.hhn.service.BranchOrderService;
 
 @RestController
@@ -22,7 +23,7 @@ public class BranchOrderController {
 	
 	@Autowired
 	BranchOrderService branchOrderService;
-	
+	 
 	@GetMapping("/getBranchOrderTableData")
 	public ResponseEntity<JSONObject> getBranchOrderTableData(@RequestParam(defaultValue = "0") Integer page,
 			@RequestParam(defaultValue = "orderDate") String sort, @RequestParam(defaultValue = "asc") String order,
@@ -35,6 +36,26 @@ public class BranchOrderController {
 	public ResponseEntity<JSONObject> postBranchOrderData(@RequestBody BranchOrderDTO branchOrderDTO) {
 		branchOrderService.save(branchOrderDTO);
 		return getBranchOrderTableData(0, "orderDate", "asc", 5, "");
+	}
+	
+	@PostMapping("/deleteBranchOrderData")
+	public ResponseEntity<JSONObject> deleteBranchOrderData(@RequestBody BranchOrder branchOrder) {
+		branchOrderService.delete(branchOrder);
+		return getBranchOrderTableData(0, "orderDate", "asc", 5, "");
+	}
+	
+	@PostMapping("/getBranchOrderItemData")
+	public ResponseEntity<JSONObject> getBranchOrderItemData(@RequestBody BranchOrder branchOrder) {
+		JSONObject response = branchOrderService.getBranchOrderItemList(branchOrder);
+		return new ResponseEntity<JSONObject>(response, new HttpHeaders(), HttpStatus.OK);
+		
+	}
+	
+	@PostMapping("/changeStatus")
+	public ResponseEntity<JSONObject> changeStatus(@RequestBody BranchOrder branchOrder) {
+		BranchOrder response = branchOrderService.changeStatus(branchOrder);
+		return getBranchOrderTableData(0, "orderDate", "asc", 5, "");
+		
 	}
 
 }

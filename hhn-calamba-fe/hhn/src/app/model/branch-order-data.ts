@@ -1,3 +1,5 @@
+import { BranchOrderItemData } from "./branch-order-item-data";
+
 export class BranchOrderData{
     branchOrderId;
     orderDate;
@@ -9,4 +11,5 @@ export class BranchOrderData{
     status;
     delivered;
     paid;
+    branchOrderItemList: BranchOrderItemData[];
 }

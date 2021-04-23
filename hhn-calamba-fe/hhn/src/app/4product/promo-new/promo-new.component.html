@@ -1,21 +1,25 @@
 <br>
-<div class="container">
-  <div style="text-align: right;">
-    <button mat-raised-button color="accent" matTooltip="View Selected Items" (click)="saveSelected()">Basket Items: {{selectedItems.length}}</button>
+<div>
+  <div [class.col-md-7]="showDraft" [class.container]="!showDraft">
+    <div>
+
+      <mat-form-field>
+        <mat-label>Select Items for the promo</mat-label>
+        <input matInput [(formControl)]="searchBox" placeholder="Ex. Hand Salve" #input />
+      </mat-form-field>
+      <div *ngFor="let item of filteredItems | async;" style="width: 206px; height: 102px; float : left; margin: 5px"
+        (click)="selectItem(item)">
+        <mat-card style="width: 100%; background-color: #ffeaa7; height: 100%;">
+          <mat-card-content style="text-align: center;">
+            <label>{{item.itemName}} {{item.size}}</label><br>
+            <label *ngIf="item.variant!='' && item.variant!=undefined">({{item.variant}})</label>
+            <div>&#8369;{{item.srp}}</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
   </div>
-  
-  <mat-form-field>
-    <mat-label>Select Items for the promo</mat-label>
-    <input matInput [(formControl)]="searchBox" placeholder="Ex. Hand Salve" #input />
-  </mat-form-field>
-  <div *ngFor="let item of filteredItems | async;" style="width: 206px; height: 102px; float : left; margin: 5px"
-    (click)="selectItem(item.itemName)">
-    <mat-card style="width: 100%; background-color: #ffeaa7; height: 100%;">
-      <mat-card-content style="text-align: center;">
-        <label>{{item.itemName}} {{item.size}}</label><br>
-        <label *ngIf="item.variant!='' && item.variant!=undefined">({{item.variant}})</label>
-        <div>&#8369;{{item.srp}}</div>
-      </mat-card-content>
-    </mat-card>
+  <div [class.col-md-5]="showDraft" [hidden]="!showDraft">
+    <app-promo-draft></app-promo-draft>
   </div>
 </div>

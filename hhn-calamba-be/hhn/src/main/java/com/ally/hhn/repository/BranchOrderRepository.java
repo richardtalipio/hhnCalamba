@@ -1,5 +1,6 @@
 package com.ally.hhn.repository;
 
+
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -10,9 +11,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.ally.hhn.model.BranchOrder;
-import com.ally.hhn.model.Item;
 
 @Repository
 public interface BranchOrderRepository extends JpaRepository<BranchOrder, Integer> {
+	
+	@Query("SELECT BO FROM BranchOrder BO WHERE BO.status != 'CLOSED'")
+	Page<BranchOrder> findAllOpen(Pageable pageable);
+	
+	@Query("SELECT BO FROM BranchOrder BO WHERE BO.status != 'CLOSED'")
+	List<BranchOrder> findAllOpen();
 
 }

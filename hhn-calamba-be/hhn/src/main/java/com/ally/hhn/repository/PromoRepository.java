@@ -19,4 +19,7 @@ public interface PromoRepository  extends JpaRepository<Promo, Integer> {
 	
 	@Query("SELECT P FROM Promo  P WHERE P.promoName LIKE %:promoName% ")
 	List<Promo> findByPromoName(@Param("promoName") String promoName);
+	
+	@Query("SELECT P FROM Promo  P WHERE P.isActive = true")
+	List<Promo> findAllActive();
 }

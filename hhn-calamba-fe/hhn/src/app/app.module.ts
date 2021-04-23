@@ -18,11 +18,9 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatListModule } from '@angular/material/list';
 import { CustomerOrderComponent } from './3customer-order/customer-order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ItemMenuPopupComponent } from './popup/item-menu-popup/item-menu-popup.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import { BranchOrderDetailsComponent } from './2branch-order/popup/branch-order-details/branch-order-details.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule }  from '@angular/material/stepper'; 
 import { MatChipsModule } from '@angular/material/chips';
@@ -41,9 +39,7 @@ import { MatCardModule } from '@angular/material/card';
     HomeComponent,
     ReportComponent,
     NotFoundComponent,
-    CustomerOrderComponent,
-    ItemMenuPopupComponent,
-    BranchOrderDetailsComponent
+    CustomerOrderComponent
   ],
   imports: [
     HttpClientModule,

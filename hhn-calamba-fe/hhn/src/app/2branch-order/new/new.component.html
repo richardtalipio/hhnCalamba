@@ -1,0 +1,33 @@
+<br>
+<div>
+  <div [class.col-md-7]="showInvoice" [class.container]="!showInvoice">
+    <mat-form-field>
+      <mat-label>Search for items to purchase</mat-label>
+      <input matInput [(formControl)]="searchBox" placeholder="Ex. Hand Salve" #input />
+    </mat-form-field>
+    <div style="overflow:auto; max-height: 500px;">
+      <div *ngFor="let item of filteredItems | async;" style="width: 206px; height: 102px; float : left; margin: 5px"
+        (click)="selectProduct(item, 'item')">
+        <mat-card style="width: 100%; background-color: #ffeaa7; height: 100%;">
+          <mat-card-content style="text-align: center;">
+            <label>{{item.itemName}} {{item.size}}</label><br>
+            <label *ngIf="item.variant!='' && item.variant!=undefined">({{item.variant}})</label>
+            <div>&#8369;{{item.srp}}</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div *ngFor="let promo of filteredPromos | async;" style="width: 206px; height: 150px; float : left; margin: 5px"
+        (click)="selectProduct(promo, 'promo')">
+        <mat-card style="width: 100%; background-color: #ffeaa7; height: 100%;">
+          <mat-card-content style="text-align: center;">
+            <label>{{promo.promoName}} </label><br>
+            <div>&#8369;{{promo.promoPrice}}</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <div [class.col-md-5] = "showInvoice" [hidden]="!showInvoice">
+    <app-invoice></app-invoice>
+  </div>
+</div>

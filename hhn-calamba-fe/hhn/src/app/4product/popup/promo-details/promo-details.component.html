@@ -1,0 +1,12 @@
+<div style="width: 500px; text-align: center;">
+    <mat-form-field style="width:80%; max-height: 300px;">
+        <mat-label>Promo Name</mat-label>
+        <textarea [(ngModel)]="promoData.promoName" matInput style="resize: none; height: 50px;"></textarea>
+    </mat-form-field>
+
+    <div><label>Actual Price: {{actualPrice}}</label></div>
+    <div><label> Price: {{promoData.promoPrice}}</label></div>
+    <div><button mat-raised-button color="primary"  [mat-dialog-close]="promoData" >CONFIRM</button>
+    </div>
+
+</div>

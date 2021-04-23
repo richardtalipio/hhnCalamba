@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 @Table(name="promo")
 public class Promo {
 
+
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "promo_id", nullable = false)
@@ -25,7 +26,7 @@ public class Promo {
 	private String promoName;
 	
 	@Column(name = "is_active")
-	private boolean isActive;
+	private Boolean isActive;
 	
 	@Column(name = "promo_price")
 	private float promoPrice;
@@ -57,11 +58,11 @@ public class Promo {
 		this.promoPrice = promoPrice;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return isActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
 	

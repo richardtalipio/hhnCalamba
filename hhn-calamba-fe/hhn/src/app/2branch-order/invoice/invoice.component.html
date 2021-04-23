@@ -1,0 +1,53 @@
+<br>
+<div style="max-height: 500px; overflow: auto;">
+    <div style="text-align: center;">
+        <h1>SALES INVOICE</h1>
+    </div>
+    <table style="width: 100%;">
+        <tr>
+            <th class="itemname">Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        <br>
+        <tr *ngFor="let product of branchOrderitems; index as i">
+            <td class="itemname">
+                <span *ngIf="product.name!=undefined">
+                    <label>{{product.name}}</label>
+                    <span *ngIf="product.product.variant!='' && product.product.variant!=undefined">
+                        <br><label>({{product.product.variant}})</label></span>
+                </span>
+                <span *ngIf="product.promoItemList.length != 0 && product.promoItemList != undefined">
+                    <div><label>**PROMO**</label></div>
+                    <div *ngFor="let promoitem of product.promoItemList">
+                        <label *ngIf="promoitem.quantity!=1 ">{{promoitem.quantity}}&nbsp;</label>
+                        <label>{{promoitem.item.itemName}} {{promoitem.item.size}}</label>
+                        <label
+                            *ngIf="promoitem.item.variant!='' && promoitem.item.variant!=undefined">&nbsp;({{promoitem.item.variant}})</label>
+                    </div>
+                </span>
+            </td>
+            <td> {{product.quantity}}</td>
+            <td><span *ngIf="product.freebie; else price">FREE ITEM</span>
+                <ng-template #price>{{product.dealersPrice}}</ng-template>
+            </td>
+            <td>
+                <button mat-icon-button color="warn" (click)="delete(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>Total</td>
+            <td></td>
+            <td>{{grandTotal}}</td>
+        </tr>
+    </table>
+    <br>
+    <div style="text-align: center;">
+        <button mat-raised-button color="primary" (click)="confirm()">CONFIRM</button>
+    </div>
+
+</div>

@@ -1,0 +1,46 @@
+<br>
+
+<div style=" width: 500px;">
+
+    <table style="width: 100%;">
+        <tr>
+            <th class="itemname">Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+        </tr>
+        <br>
+        <tr *ngFor="let product of branchOrderitems; index as i">
+            <td class="itemname">
+                <span *ngIf="product.name!=undefined">
+                    <label>{{product.name}}</label>
+                    <span *ngIf="product.product.variant!='' && product.product.variant!=undefined">
+                        <br><label>({{product.product.variant}})</label></span>
+                </span>
+                <div *ngIf="product.promoItemList">
+                    <div><label>**PROMO**</label></div>
+                    <div *ngFor="let promoitem of product.promoItemList">
+                        <label *ngIf="promoitem.quantity!=1 ">{{promoitem.quantity}}&nbsp;</label>
+                        <label>{{promoitem.item.itemName}} {{promoitem.item.size}}</label>
+                        <label
+                            *ngIf="promoitem.item.variant!='' && promoitem.item.variant!=undefined">&nbsp;({{promoitem.item.variant}})</label>
+                    </div>
+                </div>
+            </td>
+            <td> {{product.quantity}}</td>
+            <td><span *ngIf="product.freebie; else price">FREE ITEM</span>
+                <ng-template #price>{{product.dealersPrice}}</ng-template>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <div style="text-align: center;">
+        <button mat-raised-button color="primary" [disabled]="data.paid" (click)="changeStatus('PAY')" [mat-dialog-close]="true">
+            PAY {{data.grandTotal}}
+        </button>&nbsp;
+        <button mat-raised-button color="primary" [disabled]="data.delivered" (click)="changeStatus('DELIVER')" [mat-dialog-close]="true">
+            DELIVER
+        </button>
+        <br>
+    </div>
+
+</div>

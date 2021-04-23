@@ -35,7 +35,7 @@ public class BranchOrderItem {
 	private Integer productCode;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="branch_order_id", nullable=false)
+	@JoinColumn(name="branch_order_id")
 	private BranchOrder branchOrder;
 
 	public Integer getBranchOrderItemId() {

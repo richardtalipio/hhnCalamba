@@ -1,0 +1,29 @@
+<div style="text-align: center;">
+    <label>{{promoItem.item.itemName}} {{promoItem.item.size}}</label>
+    <label *ngIf="promoItem.item.variant!='' && promoItem.item.variant!=undefined">&nbsp;({{promoItem.item.variant}})</label>
+    <br>
+    Orig Price: &#8369;{{totalSRP}}<br>
+    <mat-form-field appearance="standard" style="width: 150px">
+        <mat-label>Promo Price</mat-label>
+        <input [(ngModel)]="promoItem.itemPrice" matInput />
+        <span matPrefix>&#8369;&nbsp;</span>
+    </mat-form-field> <br>
+
+    <div>
+        <button mat-icon-button (click)="remove()" [disabled]="disabledbtn">
+            <mat-icon>remove</mat-icon>
+        </button>&nbsp;
+        <label>{{promoItem.quantity}}</label>&nbsp;
+        <button mat-icon-button (click)="add()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div><br>
+    <div>
+        <button mat-mini-fab color = "primary" (click)="addItem(false)" [mat-dialog-close]="promoItem" > 
+            <mat-icon>shopping_cart</mat-icon>
+        </button> &nbsp;
+        <button mat-mini-fab color = "primary" (click)="addItem(true)" [mat-dialog-close]="promoItem">
+            <mat-icon>sell</mat-icon>
+        </button> &nbsp;
+    </div>
+</div>

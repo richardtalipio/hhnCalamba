@@ -7,5 +7,10 @@ export class BranchOrderItemData{
     productType;
     productCode;
     freebie;
+    promoItemList = [];
+    product;
+    name;
+    srp;
+    variant;
     
 }

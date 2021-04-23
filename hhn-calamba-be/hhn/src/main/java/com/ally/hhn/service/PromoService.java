@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.ally.hhn.model.Item;
 import com.ally.hhn.model.Promo;
 import com.ally.hhn.model.PromoDTO;
-import com.ally.hhn.model.PromoJSON;
 import com.ally.hhn.model.PromoItem;
 import com.ally.hhn.repository.PromoItemRepository;
 import com.ally.hhn.repository.PromoRepository;
@@ -48,8 +47,8 @@ public class PromoService {
 		return json;
 	}
 	
-	public void save(PromoJSON promoDTO) {
-		final Promo savedPromo = promoRepository.save(promoDTO.getPromo());
+	public void save(PromoDTO promoDTO) {
+		final Promo savedPromo = promoRepository.save(promoDTO.getPromoObj());
 		
 		promoDTO.getPromoItemList().forEach(promoItem -> {
 			promoItem.setPromo(savedPromo);
@@ -72,7 +71,7 @@ public class PromoService {
 	
 	public List<PromoDTO> getAllPromos(){
 		List<PromoDTO> promoDtoList = new ArrayList<PromoDTO>();
-		for(Promo promo: promoRepository.findAll()) {
+		for(Promo promo: promoRepository.findAllActive()) {
 			List<PromoItem> promoItems = promoItemRepository.findByPromoId(promo.getPromoId());
 			PromoDTO promoDto = new PromoDTO(promo, promoItems);
 			promoDtoList.add(promoDto);		

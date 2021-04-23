@@ -23,8 +23,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PromoNewComponent } from './promo-new/promo-new.component';
 import { MatCardModule } from '@angular/material/card';
-import { PromoPricesComponent } from './promo-prices/promo-prices.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { PromoDraftComponent } from './promo-draft/promo-draft.component';
+import { PromoConfigComponent } from './popup/promo-config/promo-config.component';
+import { PromoDetailsComponent } from './popup/promo-details/promo-details.component';
 
 
 @NgModule({
@@ -50,7 +52,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         MatCheckboxModule
         
     ],
-    declarations: [ItemComponent, PromoComponent, ItemDetailsPopupComponent, DeletePopupComponent, PromoNewComponent, PromoPricesComponent],
+    declarations: [ItemComponent, PromoComponent, ItemDetailsPopupComponent, DeletePopupComponent, PromoNewComponent, PromoDraftComponent, PromoConfigComponent, PromoDetailsComponent],
     exports: []
 })
 export class ProductModule { }

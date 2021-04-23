@@ -67,32 +67,6 @@ export class PromoComponent implements AfterViewInit {
   openPromoDetails() {
     this.itemService.setSelectedItems([]);
     this.router.navigate(['products/promos/new-promo']);
-    // const dialogRef = this.dialog.open(PromoDetailsComponent, {
-    //   data: new PromoData
-    // });
-
-    // dialogRef.afterClosed().subscribe(promoDTO => {
-    //   if (promoDTO) {
-    //     this.isLoadingResults = true;
-    //     this.promoService.postPromoData(promoDTO).subscribe({
-    //       next: data => {
-    //         this.dataSource = data.promoList;
-    //         this.resultsLength = data.promoCount;
-    //         this.paginator.pageIndex = 0;
-    //         this.paginator.pageSize = 5;
-    //         this.sort.active = "promoName";
-    //         this.sort.direction = "asc";
-    //         this.isLoadingResults = false;
-    //         this.isRateLimitReached = false;
-    //       },
-    //       error: error => {
-    //         console.log(error);
-    //       }
-    //     });
-    //   }
-    // });
-
-
   }
 
   loadTable() {

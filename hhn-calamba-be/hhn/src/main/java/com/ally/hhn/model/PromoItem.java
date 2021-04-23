@@ -26,6 +26,9 @@ public class PromoItem {
 	@Column(name = "quantity")
 	private float quantity;
 	
+	@Column(name = "is_freebie")
+	private boolean isFreebie;
+	
 	@OneToOne
     @JoinColumn(name = "item_id", nullable=false)
     private Item item;
@@ -74,6 +77,14 @@ public class PromoItem {
 		this.quantity = quantity;
 	}
 	
+	public boolean isFreebie() {
+		return isFreebie;
+	}
+
+	public void setFreebie(boolean isFreebie) {
+		this.isFreebie = isFreebie;
+	}
+
 	@Override
 	public String toString() {
 		return "Promo Item: "+item.getItemName()+

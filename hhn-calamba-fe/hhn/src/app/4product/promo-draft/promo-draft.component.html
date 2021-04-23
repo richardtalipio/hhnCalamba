@@ -1,0 +1,45 @@
+<br>
+<div style="max-height: 500px; overflow: auto;">
+    <div style="text-align: center;">
+        <h1>PROMO DRAFT</h1>
+    </div>
+    <table style="width: 100%;">
+        <tr>
+            <th class="itemname">Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let promoitem of promoItemData; index as i">
+            <td class="itemname">
+                <label>{{promoitem.item.itemName}} {{promoitem.item.size}}</label>
+                <label
+                    *ngIf="promoitem.item.variant!='' && promoitem.item.variant!=undefined">&nbsp;({{promoitem.item.variant}})</label>
+            </td>
+            <td> {{promoitem.quantity}}</td>
+            <td><span *ngIf="promoitem.freebie; else price">FREE ITEM</span>
+                <ng-template #price>{{promoitem.itemPrice}}</ng-template>
+            </td>
+            <td>
+                <button mat-icon-button color="warn" (click)="delete(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>Actual Price</td>
+            <td></td>
+            <td>{{actualPrice}}</td>
+        </tr>
+        <tr>
+            <td>Promo Price</td>
+            <td></td>
+            <td>{{promoPrice}}</td>
+        </tr>
+    </table>
+    <br>
+    <div style="text-align: center;">
+        <button mat-raised-button color="primary" (click)="confirm()">CONFIRM</button>
+    </div>
+</div>

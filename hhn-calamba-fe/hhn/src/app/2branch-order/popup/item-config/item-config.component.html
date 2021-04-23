@@ -1,0 +1,32 @@
+<div style="text-align: center;">
+    
+    <div *ngIf="product.name!=undefined"><label>{{product.name}}</label></div>
+    <div *ngIf="product.promoItemList.length != 0 && product.promoItemList != undefined">
+        <div *ngFor="let promoitem of product.promoItemList">
+            <label *ngIf="promoitem.quantity!=1 ">{{promoitem.quantity}}&nbsp;</label>
+            <label>{{promoitem.item.itemName}} {{promoitem.item.size}}</label>
+            <label *ngIf="promoitem.item.variant!='' && promoitem.item.variant!=undefined">&nbsp;({{promoitem.item.variant}})</label>
+        </div>
+    </div>
+    <div *ngIf="product.variant!='' && product.variant!=undefined "><label>{{product.variant}}</label></div>
+    <br>
+    Orig Price: &#8369;{{totalSRP}}<br>
+    Dealer's Price: &#8369;{{totalDealersPrice}}<br><br>
+    <div>
+        <button mat-icon-button (click)="remove()" [disabled]="disabledbtn">
+            <mat-icon>remove</mat-icon>
+        </button>&nbsp;
+        <label>{{product.quantity}}</label>&nbsp;
+        <button mat-icon-button (click)="add()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div><br>
+    <div>
+        <button mat-mini-fab color = "primary" (click)="addItem(false)" [mat-dialog-close]="product" > 
+            <mat-icon>shopping_cart</mat-icon>
+        </button> &nbsp;
+        <button mat-mini-fab color = "primary" (click)="addItem(true)" [mat-dialog-close]="product">
+            <mat-icon>sell</mat-icon>
+        </button> &nbsp;
+    </div>
+</div>

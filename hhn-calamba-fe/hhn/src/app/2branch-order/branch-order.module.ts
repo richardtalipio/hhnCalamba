@@ -19,11 +19,17 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BranchOrderRoutingModule } from "./branch-order.routing.module";
-import { NewBranchOrderComponent } from './new-branch-order/new-branch-order.component';
-import { BranchOrderListComponent } from './branch-order-list/branch-order-list.component';
+import { NewComponent } from './new/new.component';
+import { ListComponent } from './list/list.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { BranchOrderPricesComponent } from './branch-order-prices/branch-order-prices.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { ItemConfigComponent } from './popup/item-config/item-config.component';
+import { ItemConfirmComponent } from './popup/item-confirm/item-confirm.component';
+import { DeletePopupComponent } from './popup/delete-popup/delete-popup.component';
+import { ViewOrderComponent } from './popup/view-order/view-order.component';
+import { ChangeStatusComponent } from './popup/change-status/change-status.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     imports: [BranchOrderRoutingModule,
@@ -47,10 +53,11 @@ import { BranchOrderPricesComponent } from './branch-order-prices/branch-order-p
         MatCardModule,
         MatCheckboxModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatSnackBarModule
         
     ],
-    declarations: [NewBranchOrderComponent, BranchOrderListComponent, BranchOrderPricesComponent],
+    declarations: [DeletePopupComponent, NewComponent, ListComponent, InvoiceComponent, ItemConfigComponent, ItemConfirmComponent, ViewOrderComponent, ChangeStatusComponent],
     exports: []
 
 })

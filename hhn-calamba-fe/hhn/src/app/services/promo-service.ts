@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { PromoData } from "../model/promo-data";
+import { PromoItemData } from "../model/promo-item-data";
 
 @Injectable({
     providedIn: 'root'
@@ -17,8 +18,8 @@ export class PromoService {
         return this.http.get<any>('api/promo/getPromoTableData?sort=' + sort + '&order=' + order + '&page=' + page + '&pageSize=' + pageSize + '&filter=' + filter);
     }
 
-    postPromoData(promoDTO: any): Observable<any>{
-        return  this.http.post<PromoData>('api/promo/postPromoData', promoDTO);
+    postPromoData(promoData: any): Observable<any>{
+        return  this.http.post<PromoData>('api/promo/postPromoData', promoData);
     }
 
     deletePromoData(promo: PromoData): Observable<any>{
@@ -27,5 +28,20 @@ export class PromoService {
 
     togglePromo(promo: PromoData){
         return  this.http.post<PromoData>('api/promo/togglePromo', promo);
+    }
+
+    selectedPromoItemArray: PromoItemData[] = [];
+    private selectedPromoItem$ = new BehaviorSubject([]);
+    selectedPromoItemObs = this.selectedPromoItem$.asObservable();
+    addNewSelectedPromoItem(newSelectedPromoItem: PromoItemData) {
+        this.selectedPromoItemArray.push(newSelectedPromoItem);
+        this.selectedPromoItem$.next(this.selectedPromoItemArray);
+    }
+    removeSelectedPromoItem(index){
+        this.selectedPromoItemArray.splice(index, 1);
+        this.selectedPromoItem$.next(this.selectedPromoItemArray);
+    }
+    setSelectedPromoItem(array: PromoItemData[] ){
+        this.selectedPromoItem$.next(array);
     }
 }

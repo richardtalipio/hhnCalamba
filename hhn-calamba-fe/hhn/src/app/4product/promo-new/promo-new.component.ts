@@ -5,6 +5,10 @@ import { Observable, Subscription } from 'rxjs';
 import { ItemData } from 'src/app/model/item-data';
 import { ItemService } from 'src/app/services/item-service';
 import { map, startWith, switchMap } from 'rxjs/operators';
+import { PromoItemData } from 'src/app/model/promo-item-data';
+import { MatDialog } from '@angular/material/dialog';
+import { PromoConfigComponent } from '../popup/promo-config/promo-config.component';
+import { PromoService } from 'src/app/services/promo-service';
 
 @Component({
   selector: 'app-promo-new',
@@ -21,13 +25,21 @@ export class PromoNewComponent implements OnInit, OnDestroy{
   selectedItems: ItemData[] = [];
   itemMenuSubscription$: Subscription;
 
+  showDraft = false ;
+
   constructor(private router: Router,
-    private itemService: ItemService) { }
+    private itemService: ItemService,
+    private promoService: PromoService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.itemMenuSubscription$ = this.itemService.getAllItems().pipe(
       map(itemList => { this.allItems = itemList }),
-      switchMap(itemList => this.itemService.selectedItems)
+      switchMap(() => this.promoService.selectedPromoItemObs),
+      switchMap(result => {
+        if (result.length == 0) this.showDraft = false;
+        return this.itemService.selectedItems
+      })
     ).subscribe(selectedItemList => {
       selectedItemList.forEach(selectedItem => {
         this.selectItem(selectedItem.itemName);
@@ -46,18 +58,24 @@ export class PromoNewComponent implements OnInit, OnDestroy{
     return this.allItems.filter(item => item.itemName.toLowerCase().indexOf(filterValue) >= 0);
   }
 
-  selectItem(itemName: String) {
-    const index = this.allItems.findIndex(x => x.itemName === itemName);
-    const selectedIndex = this.selectedItems.findIndex(x => x.itemName === itemName);
+  selectItem(item: ItemData) {
+    let promoItemData = new PromoItemData;
+    promoItemData.item = item;
+    promoItemData.oldPrice = item.srp;
+    promoItemData.quantity = 1;
+    promoItemData.promoItemName = item.itemName + " " + item.size + (item.variant ? " (" + item.variant + ")" : "")
+    const dialogRef = this.dialog.open(PromoConfigComponent, {
+      data: promoItemData
+    });
 
-    if (selectedIndex < 0) {
-      this.selectedItems.push(this.allItems.splice(index, 1)[0]);
-      this.filteredItems = this.searchBox.valueChanges.pipe(
-        startWith(null),
-        map((item: string | null) => item ? this._filter(item) : this.allItems.slice()));
-    }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.promoService.addNewSelectedPromoItem(result);
+        this.showDraft = true;
+      }
 
-    this.searchBox.patchValue("");
+    });
+
   }
 
   saveSelected() {
