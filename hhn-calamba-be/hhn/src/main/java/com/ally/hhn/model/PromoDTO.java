@@ -10,6 +10,7 @@ public class PromoDTO {
 	private Boolean isActive;
 	private float promoPrice;
 	private String includedItems;
+	private float stocksLeft;
 	private List<PromoItem> promoItemList = new ArrayList<PromoItem>();
 	
 	public PromoDTO(Promo promo, List<PromoItem> promoItemList) {
@@ -17,6 +18,7 @@ public class PromoDTO {
 		this.promoName = promo.getPromoName();
 		this.promoPrice = promo.getPromoPrice();
 		this.isActive = promo.isActive();
+		this.stocksLeft = promo.getStocksLeft();
 		this.promoItemList.addAll(promoItemList);
 	}
 	
@@ -59,7 +61,22 @@ public class PromoDTO {
 	public void setPromoItemList(List<PromoItem> promoItemList) {
 		this.promoItemList = promoItemList;
 	}
-	
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public float getStocksLeft() {
+		return stocksLeft;
+	}
+
+	public void setStocksLeft(float stocksLeft) {
+		this.stocksLeft = stocksLeft;
+	}
+
 	public Promo getPromoObj() {
 		Promo promoObj = new Promo();
 		promoObj.setPromoId(this.promoId);

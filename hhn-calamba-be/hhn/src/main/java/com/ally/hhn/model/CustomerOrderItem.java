@@ -25,6 +25,9 @@ public class CustomerOrderItem {
 	@Column(name = "selling_price")
 	private float sellingPrice;
 	
+	@Column(name = "item_discount")
+	private float itemDiscount;
+	
 	@Column(name = "productType")
 	private String productType;
 	
@@ -93,7 +96,14 @@ public class CustomerOrderItem {
 	public void setCustomerOrder(CustomerOrder customerOrder) {
 		this.customerOrder = customerOrder;
 	}
-	
+
+	public float getItemDiscount() {
+		return itemDiscount;
+	}
+
+	public void setItemDiscount(float itemDiscount) {
+		this.itemDiscount = itemDiscount;
+	}
 	
 
 }

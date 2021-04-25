@@ -26,6 +26,9 @@ public class Stock {
 	@Column(name = "selling_date")
 	private Date sellingDate;
 	
+	@Column(name = "selling_price")
+	private float sellingPrice;
+	
 	@Column(name = "purchase_price")
 	private float purchasePrice;
 	
@@ -82,6 +85,14 @@ public class Stock {
 
 	public void setItem(Item item) {
 		this.item = item;
+	}
+
+	public float getSellingPrice() {
+		return sellingPrice;
+	}
+
+	public void setSellingPrice(float sellingPrice) {
+		this.sellingPrice = sellingPrice;
 	}
 	
 	

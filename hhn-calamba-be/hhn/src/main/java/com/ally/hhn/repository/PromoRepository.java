@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.ally.hhn.model.Item;
 import com.ally.hhn.model.Promo;
 
 @Repository
@@ -22,4 +23,7 @@ public interface PromoRepository  extends JpaRepository<Promo, Integer> {
 	
 	@Query("SELECT P FROM Promo  P WHERE P.isActive = true")
 	List<Promo> findAllActive();
+	
+	@Query("SELECT P FROM Promo  P WHERE P.isActive = true and P.stocksLeft != 0")
+	List<Promo> findAllWithStock();
 }

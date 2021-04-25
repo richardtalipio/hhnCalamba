@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DeletePopupComponent } from '../popup/delete-popup/delete-popup.component';
 import { ViewOrderComponent } from '../popup/view-order/view-order.component';
+import { ProductService } from 'src/app/services/product-service';
 
 @Component({
   selector: 'app-list',
@@ -31,7 +32,8 @@ export class ListComponent implements AfterViewInit {
   excludeClosed: boolean = true;;
   constructor(private branchOrderService: BranchOrderService,
     public dialog: MatDialog,
-    private router: Router) { }
+    private router: Router,
+    private productService: ProductService) { }
 
   ngAfterViewInit() {
     this.loadTable();
@@ -65,6 +67,8 @@ export class ListComponent implements AfterViewInit {
   }
 
   placeNewOrder() {
+    this.productService.selectedProductList = [];
+    this.productService.setSelectedProduct([]);
     this.router.navigate(['branch-order/new']);
   }
 

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { BranchOrderItemData } from 'src/app/model/branch-order-item-data';
 import { BranchOrderService } from 'src/app/services/branch-order-service';
 import { ProductService } from 'src/app/services/product-service';
@@ -11,7 +12,7 @@ import { ItemConfirmComponent } from '../popup/item-confirm/item-confirm.compone
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.css']
 })
-export class InvoiceComponent implements OnInit {
+export class InvoiceComponent implements OnInit, OnDestroy {
 
   constructor(private productService: ProductService,
     public dialog: MatDialog,
@@ -19,10 +20,10 @@ export class InvoiceComponent implements OnInit {
     private branchOrderService: BranchOrderService) { }
 
   branchOrderitems: BranchOrderItemData[];
-
+  selectedProduct$: Subscription;
   grandTotal ;
   ngOnInit(): void {
-    this.productService.selectedProduct.subscribe((selectedProductList: BranchOrderItemData[]) => {
+    this.selectedProduct$ = this.productService.selectedProduct.subscribe((selectedProductList: BranchOrderItemData[]) => {
       this.grandTotal = 0;
       this.branchOrderitems = selectedProductList;
       selectedProductList.forEach(product => {
@@ -52,7 +53,10 @@ export class InvoiceComponent implements OnInit {
         
       }
     });
-      
+  }
+
+  ngOnDestroy(){
+    this.selectedProduct$.unsubscribe();
   }
 
 }

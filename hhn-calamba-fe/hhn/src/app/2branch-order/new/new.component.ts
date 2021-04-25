@@ -36,7 +36,7 @@ export class NewComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.cardSub$ = this.productService.getAllProducts().pipe(
+    this.cardSub$ = this.productService.getAllProducts(false).pipe(
       map(productList => {
         this.allItems = productList.items;
         this.allPromos = productList.promos;
@@ -50,8 +50,6 @@ export class NewComponent implements OnInit, OnDestroy {
       this.filteredPromos = this.searchBox.valueChanges.pipe(
         startWith(null),
         map((promo: string | null) => promo ? this._filter2(promo) : this.allPromos.slice()));
-
-
     });
   }
 

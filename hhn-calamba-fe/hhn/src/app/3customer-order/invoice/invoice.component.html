@@ -10,7 +10,7 @@
             <th class="center">Price</th>
         </tr>
         <br>
-        <tr *ngFor="let product of branchOrderitems; index as i">
+        <tr *ngFor="let product of customerOrderItemLists; index as i">
             <td class="itemname">
                 <button mat-icon-button color="warn" (click)="delete(i)">
                     <mat-icon>remove</mat-icon>
@@ -33,7 +33,7 @@
             </td>
             <td> {{product.quantity}}</td>
             <td ><span *ngIf="product.freebie; else price">FREE ITEM</span>
-                <ng-template #price>{{product.dealersPrice}}</ng-template>
+                <ng-template #price>{{product.sellingPrice}}</ng-template>
                 
             </td>
             

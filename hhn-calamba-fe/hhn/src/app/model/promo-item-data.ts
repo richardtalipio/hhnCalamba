@@ -5,7 +5,7 @@ export class PromoItemData{
     promoItemId;
     promoItemName;
     itemPrice;
-    quantity;
+    quantity: number;
     item : ItemData;
     promo: PromoData;
     

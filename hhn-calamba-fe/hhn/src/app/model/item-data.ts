@@ -1,6 +1,6 @@
 export class ItemData {
 
-    itemId;
+    itemId: number;
     itemName;
     variant;
     size;

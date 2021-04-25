@@ -148,48 +148,50 @@ public class BranchOrderService {
 		List<BranchOrderItem> boiList = branchOrderItemRepository.findByBranchOrderId(bo.getBranchOrderId());
 
 		boiList.forEach(boi -> {
-			
 			if (boi.getProductCode() != null) {
 				if (boi.getProductType().equalsIgnoreCase(Constants.ITEMS)) {
 					Item item = itemRepository.findById(boi.getProductCode()).get();
-					Stock newStock = new Stock();
-					newStock.setStockStatus(Constants.AVAILABLE);
-					newStock.setItem(item);
-					newStock.setPurchaseDate(bo.getDeliveryDate());
-					if(boi.isFreebie()) {
-						newStock.setPurchasePrice(0);
-					}else {
-						newStock.setPurchasePrice(boi.getDealersPrice());
+					for(int i=0; i<boi.getQuantity(); i++) {
+						Stock newStock = new Stock();
+						newStock.setStockStatus(Constants.AVAILABLE);
+						newStock.setItem(item);
+						newStock.setPurchaseDate(bo.getDeliveryDate());
+						if(boi.isFreebie()) {
+							newStock.setPurchasePrice(0);
+						}else {
+							newStock.setPurchasePrice(item.getSrp() - (item.getSrp()*Constants.DEALER_RATE));
+						}
+						stockRepository.save(newStock);
 					}
 					float stock = item.getStocksLeft() + boi.getQuantity();
 					item.setStocksLeft(stock);
-					stockRepository.save(newStock);
 					itemRepository.save(item);
-					updatePromoStock();
 				} else {
 					Promo promo = promoRepository.findById(boi.getProductCode()).get();
 					List<PromoItem> promoItemList = promoItemRepository.findByPromoId(promo.getPromoId());
 					
 					promoItemList.forEach(promoItem -> {
 						Item item = itemRepository.findById(promoItem.getItem().getItemId()).get();
-						Stock newStock = new Stock();
-						newStock.setStockStatus(Constants.AVAILABLE);
-						newStock.setItem(item);
-						newStock.setPurchaseDate(bo.getDeliveryDate());
-						if(boi.isFreebie() || promoItem.isFreebie()) {
-							newStock.setPurchasePrice(0);
-						}else {
-							newStock.setPurchasePrice(promoItem.getItemPrice());
+						float neededStock = boi.getQuantity() * promoItem.getQuantity();
+						for(int i=0; i<neededStock; i++) {
+							Stock newStock = new Stock();
+							newStock.setStockStatus(Constants.AVAILABLE);
+							newStock.setItem(item);
+							newStock.setPurchaseDate(bo.getDeliveryDate());
+							if(boi.isFreebie() || promoItem.isFreebie()) {
+								newStock.setPurchasePrice(0);
+							}else {
+								float unitPrice = promoItem.getItemPrice()/promoItem.getQuantity();
+								newStock.setPurchasePrice(unitPrice -  (unitPrice*Constants.DEALER_RATE));
+							}
+							stockRepository.save(newStock);
 						}
-						float stock = item.getStocksLeft() + (boi.getQuantity() * promoItem.getQuantity());
+						float stock = item.getStocksLeft() + neededStock;
 						item.setStocksLeft(stock);
-						stockRepository.save(newStock);
 						itemRepository.save(item);
 					});
-					float stock = promo.getStocksLeft() + boi.getQuantity() ;
-					promo.setStocksLeft(stock);
-					promoRepository.save(promo);
 				}
+				updatePromoStock();
 			}
 		});
 	}
@@ -224,14 +226,11 @@ public class BranchOrderService {
 			});
 			
 			float promoCount = Collections.min(sufficientStockMap.values());
-			if(promo.getStocksLeft() != promoCount) {
+				if(promo.getStocksLeft() != promoCount) {
 				promo.setStocksLeft(promoCount);
 				promoRepository.save(promo);
 			}
 		});
-			
-			
-		
 	}
 
 }

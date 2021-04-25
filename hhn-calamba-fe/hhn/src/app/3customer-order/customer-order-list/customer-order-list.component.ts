@@ -1,18 +1,20 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { CustomerData } from 'src/app/model/customer-data';
 import { CustomerService } from 'src/app/services/customer-service';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { merge, of } from 'rxjs';
+import { merge, of, Subscription } from 'rxjs';
 import { CustomerOrderData } from 'src/app/model/customer-order-data';
+import { Router } from '@angular/router';
+import { ProductService } from 'src/app/services/product-service';
 
 @Component({
   selector: 'app-customer-order-list',
   templateUrl: './customer-order-list.component.html',
   styleUrls: ['./customer-order-list.component.css']
 })
-export class CustomerOrderListComponent implements AfterViewInit {
+export class CustomerOrderListComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -22,13 +24,19 @@ export class CustomerOrderListComponent implements AfterViewInit {
   isLoadingResults = true;
   isRateLimitReached = true;
   displayedColumns: string[] = ['orderDate', 'deliveryDate', 'grandTotal', 'status', 'delete'];
-  constructor(private customerService: CustomerService) { }
+  currentCustomer$: Subscription;
+  constructor(private customerService: CustomerService,
+    private router: Router,
+    private productService: ProductService) { }
 
   currentCustomer: CustomerData;
 
   ngAfterViewInit(): void {
-    this.customerService.currentCustomer$.subscribe(currentCustomer => {
-      this.loadTable(currentCustomer.customerId);
+    this.currentCustomer$ = this.customerService.currentCustomer$.subscribe(currentCustomer => {
+      if (currentCustomer != null) {
+        this.loadTable(currentCustomer.customerId);
+      }
+
     })
   }
 
@@ -45,9 +53,9 @@ export class CustomerOrderListComponent implements AfterViewInit {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
-          this.resultsLength = data.itemCount;
+          this.resultsLength = data.customerOrderCount;
 
-          return data.itemList;
+          return data.customerOrderList;
         }),
         catchError(() => {
           this.isLoadingResults = false;
@@ -61,4 +69,16 @@ export class CustomerOrderListComponent implements AfterViewInit {
       });
   }
 
+  placeNewOrder() {
+    this.productService.getAllProducts(false).subscribe(allProducts => {
+      this.customerService.setCurrentItemList(allProducts.items);
+      this.customerService.setCurrentPromoList(allProducts.promos);
+      this.router.navigate(['customer-order/new']);
+    })
+
+  }
+
+  ngOnDestroy() {
+    this.currentCustomer$.unsubscribe();
+  }
 }

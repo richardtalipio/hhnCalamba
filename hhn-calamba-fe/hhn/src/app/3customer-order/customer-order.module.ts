@@ -17,12 +17,17 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule }  from '@angular/material/stepper'; 
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ItemMenuComponent } from './item-menu/item-menu.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerNewComponent } from './popup/customer-new/customer-new.component';
 import { CustomerOrderListComponent } from './customer-order-list/customer-order-list.component';
+import { NewComponent } from './new/new.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { ItemConfigComponent } from './popup/item-config/item-config.component';
+import { ItemConfirmComponent } from './popup/item-confirm/item-confirm.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
     imports: [CustomerOrderRoutingModule,
@@ -44,10 +49,12 @@ import { CustomerOrderListComponent } from './customer-order-list/customer-order
         MatChipsModule,
         MatSlideToggleModule,
         MatCardModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatDatepickerModule,
+        MatNativeDateModule
         
     ],
-    declarations: [ItemMenuComponent, CustomerComponent, CustomerNewComponent, CustomerOrderListComponent],
+    declarations: [CustomerComponent, CustomerNewComponent, CustomerOrderListComponent, NewComponent, InvoiceComponent, ItemConfigComponent, ItemConfirmComponent],
     exports: []
 })
 export class CustomerOrderModule { }

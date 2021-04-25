@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ally.hhn.model.BranchOrderDTO;
 import com.ally.hhn.model.Customer;
+import com.ally.hhn.model.CustomerOrderDTO;
 import com.ally.hhn.model.Item;
 import com.ally.hhn.service.CustomerService;
 
@@ -47,9 +49,15 @@ public class CustomerController {
 	@GetMapping("/getCustomerOrderTableData")
 	public ResponseEntity<JSONObject> getCustomerOrderTableData(@RequestParam(defaultValue = "0") Integer page,
 			@RequestParam(defaultValue = "deliveryDate") String sort, @RequestParam(defaultValue = "asc") String order,
-			@RequestParam(defaultValue = "5") Integer pageSize,  @RequestParam(defaultValue = "0") Integer filter) {
+			@RequestParam(defaultValue = "5") Integer pageSize,  @RequestParam(defaultValue = "") String filter) {
 		JSONObject response = customerService.getCustomerOrderTableData(page, sort, order, pageSize, filter);
 		return new ResponseEntity<JSONObject>(response, new HttpHeaders(), HttpStatus.OK);
+	}
+	
+	@PostMapping("/postCustomerOrderData")
+	public ResponseEntity<JSONObject> postCustomerOrderData(@RequestBody CustomerOrderDTO customerOrderDTO) {
+		customerService.save(customerOrderDTO);
+		return getCustomerOrderTableData(0, "deliveryDate", "asc", 5, "");
 	}
 	
 }

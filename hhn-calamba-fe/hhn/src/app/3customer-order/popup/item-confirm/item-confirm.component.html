@@ -1,0 +1,39 @@
+<div [formGroup]="customerOrderForm">
+    <mat-form-field style="width: 48%;">
+        <mat-label>Delivery Date</mat-label>
+        <input matInput formControlName="deliveryDate" [matDatepicker]="picker"  [min]="todayDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>&nbsp;
+    <mat-form-field style="width: 48%;">
+        <mat-label>Delivery Method</mat-label>
+        <mat-select formControlName="deliveryMethod">
+            <mat-option value="Lalamove">Lalamove</mat-option>
+            <mat-option value="Pickup">Pickup</mat-option>
+        </mat-select>
+    </mat-form-field><br>
+    <mat-form-field style="width: 49%;">
+        <mat-label>Payment Method</mat-label>
+        <mat-select formControlName="paymentMethod">
+            <mat-option value="BPI">BPI</mat-option>
+            <mat-option value="Cash">Cash</mat-option>
+        </mat-select>
+    </mat-form-field>&nbsp;
+    <mat-form-field style="width: 49%;">
+        <mat-label>Delivery Fee</mat-label>
+        <span matPrefix>&#8369;&nbsp;</span>
+        <input formControlName="deliveryCharge" matInput class="example-right-align" (ngModelChange)= "onFeeChange()"
+            keypress="return String.fromCharCode(event.charCode).match(/[^a-zA-Z0-9]/g) === null">
+    </mat-form-field><br>
+    <mat-form-field style="width: 100%;">
+        <mat-label>Delivery Address</mat-label>
+        <input formControlName="deliveryAddress" matInput class="example-right-align">
+    </mat-form-field>
+    <div style="text-align: center;">
+        <label> Total: {{customerOrderForm.value.grandTotal}} </label><br><br>
+        <button mat-raised-button color="primary" [disabled] = "customerOrderForm.invalid" [mat-dialog-close]="customerOrderForm.value">
+            CHECKOUT
+        </button>
+    </div>
+
+</div>

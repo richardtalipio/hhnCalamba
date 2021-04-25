@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ally.hhn.model.Item;
@@ -23,10 +24,10 @@ public class ProductController {
 	PromoService promoService;
 	
 	@GetMapping("/getAllProducts")
-	public HashMap<String, Object> getProducts(){
+	public HashMap<String, Object> getProducts(@RequestParam(defaultValue = "false") boolean withStock){
 		HashMap<String, Object> products = new HashMap<String, Object>();
-		products.put("items", itemService.getAllItems(false));
-		products.put("promos", promoService.getAllPromos());
+		products.put("items", itemService.getAllItems(withStock));
+		products.put("promos", promoService.getAllPromos(withStock));
 		return products;
 	}
 

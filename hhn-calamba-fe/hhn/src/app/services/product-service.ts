@@ -15,8 +15,8 @@ export class ProductService{
 
     }
 
-    getAllProducts():  Observable<any>{
-        return this.http.get<any>('api/product/getAllProducts');
+    getAllProducts(withStock: boolean):  Observable<any>{
+        return this.http.get<any>('api/product/getAllProducts?withStock='+withStock);
     }
 
     selectedProductList: BranchOrderItemData[] = [];

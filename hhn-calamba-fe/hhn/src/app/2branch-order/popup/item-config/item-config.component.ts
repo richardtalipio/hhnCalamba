@@ -12,7 +12,7 @@ export class ItemConfigComponent implements OnInit {
   product: BranchOrderItemData;
   disabledbtn = false;
   totalSRP = 0;
-  totalDealersPrice = 0;
+  totalDealersPrice: any = 0;
   constructor(public dialogRef: MatDialogRef<ItemConfigComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,) { }
 
@@ -43,7 +43,7 @@ export class ItemConfigComponent implements OnInit {
 
   computePrice(){
     this.totalSRP = this.product.srp * this.product.quantity;
-    this.totalDealersPrice = this.product.dealersPrice * this.product.quantity;
+    this.totalDealersPrice = (parseFloat(this.product.dealersPrice) * parseFloat(this.product.quantity)).toFixed(2);
   }
 
   addItem(isfreebie){
