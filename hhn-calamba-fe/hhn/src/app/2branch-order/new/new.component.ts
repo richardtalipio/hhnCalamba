@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ItemConfigComponent } from '../popup/item-config/item-config.component';
 import { BranchOrderData } from 'src/app/model/branch-order-data';
 import { BranchOrderItemData } from 'src/app/model/branch-order-item-data';
+import { NgxMasonryComponent } from 'ngx-masonry';
 
 @Component({
   selector: 'app-new',
@@ -28,6 +29,8 @@ export class NewComponent implements OnInit, OnDestroy {
   allPromos: PromoData[];
   filteredPromos: Observable<PromoData[]>;
   cardSub$: Subscription;
+
+  @ViewChild(NgxMasonryComponent) masonry: NgxMasonryComponent;
 
   constructor(private router: Router,
     private productService: ProductService,
@@ -50,18 +53,18 @@ export class NewComponent implements OnInit, OnDestroy {
       this.filteredPromos = this.searchBox.valueChanges.pipe(
         startWith(null),
         map((promo: string | null) => promo ? this._filter2(promo) : this.allPromos.slice()));
+
+
     });
   }
 
   private _filter(value: string): ItemData[] {
     const filterValue = value.toString().toLowerCase();
-
     return this.allItems.filter(item => item.itemName.toLowerCase().indexOf(filterValue) >= 0);
   }
 
   private _filter2(value: string): PromoData[] {
     const filterValue = value.toString().toLowerCase();
-
     return this.allPromos.filter(promo => promo.promoName.toLowerCase().indexOf(filterValue) >= 0);
   }
 

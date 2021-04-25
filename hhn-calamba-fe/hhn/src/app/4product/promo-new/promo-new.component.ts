@@ -48,7 +48,7 @@ export class PromoNewComponent implements OnInit, OnDestroy{
       this.filteredItems = this.searchBox.valueChanges.pipe(
         startWith(null),
         map((item: string | null) => item ? this._filter(item) : this.allItems.slice()));
-
+        
     });
   }
 

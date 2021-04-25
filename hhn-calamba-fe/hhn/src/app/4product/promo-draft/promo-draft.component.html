@@ -3,15 +3,17 @@
     <div style="text-align: center;">
         <h1>PROMO DRAFT</h1>
     </div>
-    <table style="width: 100%;">
+    <table  id="order" style="width: 100%;">
         <tr>
-            <th class="itemname">Item</th>
-            <th>Qty</th>
-            <th>Price</th>
-            <th></th>
+            <th class="center">Item</th>
+            <th class="center">Quantity</th>
+            <th class="center">Price</th>
         </tr>
         <tr *ngFor="let promoitem of promoItemData; index as i">
             <td class="itemname">
+                <button mat-icon-button color="warn" (click)="delete(i)">
+                    <mat-icon>remove</mat-icon>
+                </button>
                 <label>{{promoitem.item.itemName}} {{promoitem.item.size}}</label>
                 <label
                     *ngIf="promoitem.item.variant!='' && promoitem.item.variant!=undefined">&nbsp;({{promoitem.item.variant}})</label>
@@ -19,11 +21,6 @@
             <td> {{promoitem.quantity}}</td>
             <td><span *ngIf="promoitem.freebie; else price">FREE ITEM</span>
                 <ng-template #price>{{promoitem.itemPrice}}</ng-template>
-            </td>
-            <td>
-                <button mat-icon-button color="warn" (click)="delete(i)">
-                    <mat-icon>delete</mat-icon>
-                </button>
             </td>
         </tr>
         <br>

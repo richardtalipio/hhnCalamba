@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { CustomerService } from 'src/app/services/customer-service';
 import * as lodash from 'lodash';
 import { CustomerOrderItemData } from 'src/app/model/customer-order-item-data';
 import { ItemConfigComponent } from '../popup/item-config/item-config.component';
+import { NgxMasonryComponent } from 'ngx-masonry';
 
 @Component({
   selector: 'app-new',
@@ -30,6 +31,7 @@ export class NewComponent implements OnInit, OnDestroy {
   cardSub$: Subscription;
   removed$: Subscription;
 
+  @ViewChild(NgxMasonryComponent) masonry: NgxMasonryComponent;
 
   constructor(private router: Router,
     private productService: ProductService,
@@ -45,15 +47,19 @@ export class NewComponent implements OnInit, OnDestroy {
         this.allPromos = promoList;
         this.filteredItems = this._filter(searchBox, itemList);
         this.filteredPromos = this._filter2(searchBox, itemList, promoList);
+        if (this.masonry !== undefined) {
+          this.masonry.reloadItems();
+          this.masonry.layout();
+        }
       });
 
-      this.removed$ = this.customerService.removedProduct$.subscribe((removedProduct: CustomerOrderItemData) => {
-      if (removedProduct !== null && removedProduct !==undefined ) {
+    this.removed$ = this.customerService.removedProduct$.subscribe((removedProduct: CustomerOrderItemData) => {
+      if (removedProduct !== null && removedProduct !== undefined) {
         if (removedProduct.productType === 'item') {
           const index = this.allItems.findIndex(x => x.itemId === removedProduct.productCode);
           let stocks = this.allItems[index].stocksLeft;
           this.allItems[index].stocksLeft = stocks + removedProduct.quantity;
-        }else{
+        } else {
           const index = this.allPromos.findIndex(x => x.promoId === removedProduct.productCode);
           this.allPromos[index].promoItemList.forEach(promoItem => {
             const index = this.allItems.findIndex(x => x.itemId === promoItem.item.itemId);
@@ -65,12 +71,12 @@ export class NewComponent implements OnInit, OnDestroy {
         this.updatePromoStock();
       }
 
-      this.showInvoice$ = this.customerService.closeInvoice$.subscribe((closeInvoice: boolean)=> {
+      this.showInvoice$ = this.customerService.closeInvoice$.subscribe((closeInvoice: boolean) => {
         this.showInvoice = !closeInvoice;
       })
     });
 
-    
+
 
     this.searchBox.setValue("");
   }

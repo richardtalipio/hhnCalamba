@@ -28,6 +28,7 @@ import { ItemConfigComponent } from './popup/item-config/item-config.component';
 import { ItemConfirmComponent } from './popup/item-confirm/item-confirm.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 @NgModule({
     imports: [CustomerOrderRoutingModule,
@@ -51,7 +52,8 @@ import { MatNativeDateModule } from '@angular/material/core';
         MatCardModule,
         MatTooltipModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        NgxMasonryModule
         
     ],
     declarations: [CustomerComponent, CustomerNewComponent, CustomerOrderListComponent, NewComponent, InvoiceComponent, ItemConfigComponent, ItemConfirmComponent],

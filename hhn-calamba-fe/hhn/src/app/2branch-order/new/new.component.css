@@ -2,3 +2,17 @@
     font-size: 14px;
     width: 100%;
 }
+
+.masonry{
+    column-count: 5;
+    column-gap: 1em;
+    overflow:auto;
+    width: 100%
+}
+
+.items {
+    width: 100%; 
+    height: auto; 
+    margin: 0 0 1em;
+    display: inline-block;
+}
