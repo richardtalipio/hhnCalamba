@@ -28,7 +28,6 @@ import { PromoDraftComponent } from './promo-draft/promo-draft.component';
 import { PromoConfigComponent } from './popup/promo-config/promo-config.component';
 import { PromoDetailsComponent } from './popup/promo-details/promo-details.component';
 import { PromoViewComponent } from './popup/promo-view/promo-view.component';
-import { NgxMasonryModule } from 'ngx-masonry';
 
 @NgModule({
     imports: [ProductRoutingModule,
@@ -50,8 +49,7 @@ import { NgxMasonryModule } from 'ngx-masonry';
         MatChipsModule,
         MatSlideToggleModule,
         MatCardModule,
-        MatCheckboxModule,
-        NgxMasonryModule
+        MatCheckboxModule
         
     ],
     declarations: [ItemComponent, PromoComponent, ItemDetailsPopupComponent, DeletePopupComponent, PromoNewComponent, PromoDraftComponent, PromoConfigComponent, PromoDetailsComponent, PromoViewComponent],

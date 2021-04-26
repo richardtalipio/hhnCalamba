@@ -8,6 +8,8 @@ import { merge, of, Subscription } from 'rxjs';
 import { CustomerOrderData } from 'src/app/model/customer-order-data';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product-service';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewOrderComponent } from '../popup/view-order/view-order.component';
 
 @Component({
   selector: 'app-customer-order-list',
@@ -23,11 +25,13 @@ export class CustomerOrderListComponent implements AfterViewInit, OnDestroy {
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = true;
-  displayedColumns: string[] = ['orderDate', 'deliveryDate', 'grandTotal', 'status', 'delete'];
+  displayedColumns: string[] = ['orderDate', 'deliveryDate', 'grandTotal', 'status'];
   currentCustomer$: Subscription;
+
   constructor(private customerService: CustomerService,
     private router: Router,
-    private productService: ProductService) { }
+    private productService: ProductService,
+    public dialog: MatDialog) { }
 
   currentCustomer: CustomerData;
 
@@ -80,5 +84,31 @@ export class CustomerOrderListComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.currentCustomer$.unsubscribe();
+  }
+
+  showCustomerOrderDetails(data: CustomerOrderData) {
+    const dialogRef = this.dialog.open(ViewOrderComponent, {
+      data: data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.isLoadingResults = true;
+        this.customerService.coListObs.subscribe({
+          next: (data:any) => {
+            this.dataSource = data.customerOrderList;
+            this.resultsLength = data.customerOrderCount;
+            this.paginator.pageIndex = 0;
+            this.paginator.pageSize = 5;
+            this.sort.active = "deliveryDate";
+            this.sort.direction = "asc";
+            this.isLoadingResults = false;
+            this.isRateLimitReached = false;
+          },
+          error: error => {
+            console.log(error);
+          }
+        });
+      }
+    })
   }
 }

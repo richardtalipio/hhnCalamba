@@ -33,6 +33,9 @@ public class CustomerOrder {
 	@Column(name = "delivery_method")
 	private String deliveryMethod;
 	
+	@Column(name = "delivery_address")
+	private String deliveryAddress;
+	
 	@Column(name = "payment_method")
 	private String paymentMethod;
 	
@@ -54,7 +57,7 @@ public class CustomerOrder {
 	@Column(name = "is_paid")
 	private boolean isPaid;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="customer_id")
 	private Customer customer;
 
@@ -160,6 +163,14 @@ public class CustomerOrder {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public String getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	public void setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
 	}
 	
 	

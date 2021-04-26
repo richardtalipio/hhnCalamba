@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ally.hhn.model.BranchOrder;
 import com.ally.hhn.model.BranchOrderDTO;
 import com.ally.hhn.model.Customer;
+import com.ally.hhn.model.CustomerOrder;
 import com.ally.hhn.model.CustomerOrderDTO;
 import com.ally.hhn.model.Item;
 import com.ally.hhn.service.CustomerService;
@@ -60,4 +62,22 @@ public class CustomerController {
 		return getCustomerOrderTableData(0, "deliveryDate", "asc", 5, "");
 	}
 	
+	@PostMapping("/getCustomerOrderItemData")
+	public ResponseEntity<JSONObject> getCustomerOrderItemData(@RequestBody CustomerOrder customerOrder) {
+		JSONObject response = customerService.getCustomerOrderItemList(customerOrder);
+		return new ResponseEntity<JSONObject>(response, new HttpHeaders(), HttpStatus.OK);
+	}
+	
+	@PostMapping("/changeStatus")
+	public ResponseEntity<JSONObject> changeStatus(@RequestBody CustomerOrder customerOrder) {
+		CustomerOrder response = customerService.changeStatus(customerOrder);
+		return getCustomerOrderTableData(0, "deliveryDate", "asc", 5, "");
+		
+	}
+	
+	@PostMapping("/deleteCustomerOrderData")
+	public ResponseEntity<JSONObject> deleteCustomerOrderData(@RequestBody CustomerOrder customerOrder) {
+		customerService.deleteCustomerOrder(customerOrder);
+		return getCustomerOrderTableData(0, "deliveryDate", "asc", 5, String.valueOf(customerOrder.getCustomer().getCustomerId()));
+	}
 }

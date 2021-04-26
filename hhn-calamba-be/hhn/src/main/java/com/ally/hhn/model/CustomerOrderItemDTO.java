@@ -15,6 +15,7 @@ public class CustomerOrderItemDTO {
 	private String name;
 	private float srp;
 	private String variant;
+	private float itemDiscount;
 	
 	public CustomerOrderItemDTO(CustomerOrderItem coi) {
 		this.customerOrderItemId = coi.getCustomerOrderItemId();
@@ -23,6 +24,8 @@ public class CustomerOrderItemDTO {
 		this.productType = coi.getProductType();
 		this.quantity = coi.getQuantity();
 		this.isFreebie = coi.isFreebie();
+		this.itemDiscount = coi.getItemDiscount();
+		
 	}
 	
 	public Integer getCustomerOrderItemId() {
@@ -94,4 +97,14 @@ public class CustomerOrderItemDTO {
 	public void setVariant(String variant) {
 		this.variant = variant;
 	}
+
+	public float getItemDiscount() {
+		return itemDiscount;
+	}
+
+	public void setItemDiscount(float itemDiscount) {
+		this.itemDiscount = itemDiscount;
+	}
+	
+	
 }

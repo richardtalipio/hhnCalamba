@@ -1,0 +1,102 @@
+<div class="center row">
+    <div class="col-md-3">
+        <img class="logo" src="../../../../assets/images/HHN CH.png" />
+    </div>
+    <div class="col-md-9" style = "padding-top: 25px; font-weight: bold;">
+        <span>
+            HUMAN HEART NATURE CALAMBA COMMUNITY HUB<br>
+            SALES INVOICE
+        </span>
+    </div>
+</div>
+<br>
+<div style=" width: 700px;">
+    <div class = "row">
+        <div class="col-md-6">Customer Name: {{customer.name}}</div>
+        <div class="col-md-6">Order Date: {{data.orderDate}}</div>
+    </div>
+    <div class = "row">
+        <div class="col-md-6">Delivery Address: {{data.deliveryAddress}}</div>
+        <div class="col-md-6">Contact Number: {{customer.mobileNumber}}</div>
+    </div>
+    <br>
+    <table id="order">
+        <tr>
+            <th class="center">Item</th>
+            <th class="center">Unit Price</th>
+            <th >Quantity</th>
+            <th class="center" >SRP</th>
+            <th class="center" *ngIf="isDiscounted">Discounted</th>
+        </tr>
+        <br>
+        <tr *ngFor="let product of customerOrderItems; index as i">
+            <td>
+                <span *ngIf="product.name!=undefined">
+                    <label>{{product.name}}</label>
+                    <span *ngIf="product.product.variant!='' && product.product.variant!=undefined">
+                        <br><label>({{product.product.variant}})</label></span>
+                </span>
+                <div *ngIf="product.promoItemList">
+                    <!-- <div><label>**PROMO**</label></div> -->
+                    <div *ngFor="let promoitem of product.promoItemList">
+                        <span *ngIf="promoitem.freebie"><label>Free Item:</label>&nbsp;</span>
+                        <label *ngIf="promoitem.quantity!=1 ">{{promoitem.quantity}}&nbsp;</label>
+                        <label>{{promoitem.item.itemName}} {{promoitem.item.size}}</label>
+                        <label
+                            *ngIf="promoitem.item.variant!='' && promoitem.item.variant!=undefined">&nbsp;({{promoitem.item.variant}})</label>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span *ngIf="product.product.srp">{{product.product.srp}}</span>
+                <span *ngIf="product.product.promoPrice">{{product.product.promoPrice}}</span>
+            </td>
+            <td style="text-align: right;"> {{product.quantity}}</td>
+            <td>
+                <span *ngIf="product.product.srp">{{product.product.srp * product.quantity}} </span>
+                <span *ngIf="product.product.promoPrice">{{product.product.promoPrice *  product.quantity}}</span>
+            </td>
+            <td *ngIf="isDiscounted"><span *ngIf="product.freebie; else price" >FREE ITEM</span>
+                <ng-template #price>{{product.sellingPrice}}</ng-template>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Subtotal</td>
+            <td><span *ngIf="!isDiscounted">{{data.grandTotal - data.deliveryCharge}}</span></td>
+            <td *ngIf="isDiscounted">{{data.grandTotal - data.deliveryCharge}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Delivery</td>
+            <td ><span *ngIf="!isDiscounted">{{(data.deliveryCharge).toFixed(2)}}</span></td>
+            <td *ngIf="isDiscounted">{{(data.deliveryCharge).toFixed(2)}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><label>GRAND TOTAL</label></td>
+            <td ><label *ngIf="!isDiscounted">{{data.grandTotal}}</label></td>
+            <td *ngIf="isDiscounted"><label>{{data.grandTotal}}</label></td>
+        </tr>
+    </table>
+    <br>
+    <div style="text-align: center;">
+        <button mat-raised-button color="primary" [disabled]="data.paid" (click)="changeStatus('PAY')"
+            [mat-dialog-close]="true">
+            PAY {{data.grandTotal}}
+        </button>&nbsp;
+        <button mat-raised-button color="primary" [disabled]="data.delivered" (click)="changeStatus('DELIVER')"
+            [mat-dialog-close]="true">
+            DELIVER
+        </button>&nbsp;
+        <button mat-raised-button color="warn" [disabled]="data.delivered || data.paid" (click)="deleteCustomerOrder()"
+            [mat-dialog-close]="true">
+            CANCEL
+        </button>
+        <br>
+    </div>
+
+</div>

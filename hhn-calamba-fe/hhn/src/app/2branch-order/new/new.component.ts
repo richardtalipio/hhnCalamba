@@ -11,7 +11,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ItemConfigComponent } from '../popup/item-config/item-config.component';
 import { BranchOrderData } from 'src/app/model/branch-order-data';
 import { BranchOrderItemData } from 'src/app/model/branch-order-item-data';
-import { NgxMasonryComponent } from 'ngx-masonry';
 
 @Component({
   selector: 'app-new',
@@ -29,8 +28,6 @@ export class NewComponent implements OnInit, OnDestroy {
   allPromos: PromoData[];
   filteredPromos: Observable<PromoData[]>;
   cardSub$: Subscription;
-
-  @ViewChild(NgxMasonryComponent) masonry: NgxMasonryComponent;
 
   constructor(private router: Router,
     private productService: ProductService,

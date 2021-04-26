@@ -29,7 +29,7 @@ export class ListComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['orderDate', 'deliveryDate', 'grandTotal', 'status', 'delete'];
 
-  excludeClosed: boolean = true;;
+  excludeClosed: boolean = true;
   constructor(private branchOrderService: BranchOrderService,
     public dialog: MatDialog,
     private router: Router,
@@ -97,8 +97,8 @@ export class ListComponent implements AfterViewInit {
         });
       }
     })
-
   }
+  
   deleteBranchOrder(data: BranchOrderData) {
     const dialogRef = this.dialog.open(DeletePopupComponent);
     dialogRef.afterClosed().subscribe(result => {

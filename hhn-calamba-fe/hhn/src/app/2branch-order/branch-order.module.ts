@@ -30,7 +30,6 @@ import { DeletePopupComponent } from './popup/delete-popup/delete-popup.componen
 import { ViewOrderComponent } from './popup/view-order/view-order.component';
 import { ChangeStatusComponent } from './popup/change-status/change-status.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { NgxMasonryModule } from 'ngx-masonry';
 
 @NgModule({
     imports: [BranchOrderRoutingModule,
@@ -56,7 +55,6 @@ import { NgxMasonryModule } from 'ngx-masonry';
         MatDatepickerModule,
         MatNativeDateModule,
         MatSnackBarModule,
-        NgxMasonryModule
         
     ],
     declarations: [DeletePopupComponent, NewComponent, ListComponent, InvoiceComponent, ItemConfigComponent, ItemConfirmComponent, ViewOrderComponent, ChangeStatusComponent],

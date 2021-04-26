@@ -25,7 +25,11 @@ export class CustomerService{
     }
 
     deleteCustomerData(customer: CustomerData): any{
-        return  this.http.post<CustomerData>('api/item/deleteCustomerData', customer);
+        return  this.http.post<CustomerData>('api/customer/deleteCustomerData', customer);
+    }
+
+    deleteCustomerOrderData(customer: CustomerOrderData): any{
+        return  this.http.post<CustomerData>('api/customer/deleteCustomerOrderData', customer);
     }
 
     getCustomerOrderTableData(sort: string, order: string, page: number, pageSize: number, filter: number): Observable<any> {
@@ -36,11 +40,25 @@ export class CustomerService{
         return  this.http.post<any>('api/customer/postCustomerOrderData', customerOrderDTO);
     }
 
+    getCustomerOrderItemData(customerOrderData: CustomerOrderData): Observable<any>{
+        return  this.http.post<any>('api/customer/getCustomerOrderItemData', customerOrderData);
+    }
+
+    changeStatus(customerOrderData: CustomerOrderData): Observable<any>{
+        return  this.http.post<CustomerOrderData>('api/customer/changeStatus', customerOrderData);
+    }
+
     private currentCustomer = new BehaviorSubject(null);
     currentCustomer$ = this.currentCustomer.asObservable();
-
     setCurrentCustomer(newCurrentCustomer: CustomerData) {
         this.currentCustomer.next(newCurrentCustomer);
+    }
+
+    private coList$ = new BehaviorSubject({});
+    coListObs = this.coList$.asObservable();
+
+    setCoList(newCOList:{}) {
+        this.coList$.next(newCOList);
     }
 
     private currentItemList = new BehaviorSubject([]);

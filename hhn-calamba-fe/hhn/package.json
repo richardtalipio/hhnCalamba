@@ -23,8 +23,6 @@
     "@angular/router": "~9.1.7",
     "imagesloaded": "^4.1.4",
     "lodash": "^4.17.21",
-    "masonry-layout": "^4.2.2",
-    "ngx-masonry": "^11.0.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

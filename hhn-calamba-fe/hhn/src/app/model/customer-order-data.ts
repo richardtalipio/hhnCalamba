@@ -4,12 +4,13 @@ export class CustomerOrderData{
     deliveryDate;
     grandTotal;
     deliveryMethod;
+    deliveryAddress;
     paymentMethod;
     profitEarned;
     deliveryCharge;
     specialDiscount;
     status;
-    isDelivered;
-    isPaid;
+    delivered;
+    paid;
     
 }

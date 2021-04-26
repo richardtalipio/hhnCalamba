@@ -28,7 +28,8 @@ import { ItemConfigComponent } from './popup/item-config/item-config.component';
 import { ItemConfirmComponent } from './popup/item-confirm/item-confirm.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { NgxMasonryModule } from 'ngx-masonry';
+import { ViewOrderComponent } from './popup/view-order/view-order.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     imports: [CustomerOrderRoutingModule,
@@ -53,10 +54,10 @@ import { NgxMasonryModule } from 'ngx-masonry';
         MatTooltipModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        NgxMasonryModule
+        MatSnackBarModule
         
     ],
-    declarations: [CustomerComponent, CustomerNewComponent, CustomerOrderListComponent, NewComponent, InvoiceComponent, ItemConfigComponent, ItemConfirmComponent],
+    declarations: [CustomerComponent, CustomerNewComponent, CustomerOrderListComponent, NewComponent, InvoiceComponent, ItemConfigComponent, ItemConfirmComponent, ViewOrderComponent],
     exports: []
 })
 export class CustomerOrderModule { }

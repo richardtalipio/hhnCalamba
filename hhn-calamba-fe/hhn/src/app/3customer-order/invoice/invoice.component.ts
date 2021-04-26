@@ -41,7 +41,9 @@ export class InvoiceComponent implements OnInit, OnDestroy {
 
   delete(rowId: any) {
     let deleted: CustomerOrderItemData = this.customerOrderItemLists.splice(rowId, 1)[0];
-    this.grandTotal = (parseFloat(this.grandTotal) - parseFloat(deleted.sellingPrice)).toFixed(2);
+    if (!deleted.freebie) {
+      this.grandTotal = (parseFloat(this.grandTotal) - parseFloat(deleted.sellingPrice)).toFixed(2);
+    }
     this.customerService.removeProduct(deleted);
     if (this.customerOrderItemLists.length === 0) {
       this.customerService.close(true);
@@ -66,7 +68,7 @@ export class InvoiceComponent implements OnInit, OnDestroy {
           this.router.navigate(['customer-order/list']);
         });
       }
-    });   
+    });
   }
 
   ngOnDestroy() {

@@ -11,7 +11,6 @@ import { CustomerService } from 'src/app/services/customer-service';
 import * as lodash from 'lodash';
 import { CustomerOrderItemData } from 'src/app/model/customer-order-item-data';
 import { ItemConfigComponent } from '../popup/item-config/item-config.component';
-import { NgxMasonryComponent } from 'ngx-masonry';
 
 @Component({
   selector: 'app-new',
@@ -31,7 +30,6 @@ export class NewComponent implements OnInit, OnDestroy {
   cardSub$: Subscription;
   removed$: Subscription;
 
-  @ViewChild(NgxMasonryComponent) masonry: NgxMasonryComponent;
 
   constructor(private router: Router,
     private productService: ProductService,
@@ -47,10 +45,6 @@ export class NewComponent implements OnInit, OnDestroy {
         this.allPromos = promoList;
         this.filteredItems = this._filter(searchBox, itemList);
         this.filteredPromos = this._filter2(searchBox, itemList, promoList);
-        if (this.masonry !== undefined) {
-          this.masonry.reloadItems();
-          this.masonry.layout();
-        }
       });
 
     this.removed$ = this.customerService.removedProduct$.subscribe((removedProduct: CustomerOrderItemData) => {
