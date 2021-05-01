@@ -27,7 +27,7 @@ export class ListComponent implements AfterViewInit {
   isLoadingResults = true;
   isRateLimitReached = true;
 
-  displayedColumns: string[] = ['orderDate', 'deliveryDate', 'grandTotal', 'status', 'delete'];
+  displayedColumns: string[] = ['orderDate', 'deliveryDate', 'grandTotal', 'status'];
 
   excludeClosed: boolean = true;
   constructor(private branchOrderService: BranchOrderService,
@@ -82,31 +82,6 @@ export class ListComponent implements AfterViewInit {
         this.excludeClosed = true;
         this.branchOrderService.boListObs.subscribe({
           next: (data:any) => {
-            this.dataSource = data.branchOrderList;
-            this.resultsLength = data.branchOrderCount;
-            this.paginator.pageIndex = 0;
-            this.paginator.pageSize = 5;
-            this.sort.active = "orderDate";
-            this.sort.direction = "asc";
-            this.isLoadingResults = false;
-            this.isRateLimitReached = false;
-          },
-          error: error => {
-            console.log(error);
-          }
-        });
-      }
-    })
-  }
-  
-  deleteBranchOrder(data: BranchOrderData) {
-    const dialogRef = this.dialog.open(DeletePopupComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.isLoadingResults = true;
-        this.excludeClosed = true;
-        this.branchOrderService.deleteBranchOrderData(data).subscribe({
-          next: data => {
             this.dataSource = data.branchOrderList;
             this.resultsLength = data.branchOrderCount;
             this.paginator.pageIndex = 0;

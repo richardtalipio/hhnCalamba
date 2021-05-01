@@ -15,13 +15,9 @@ export class AppComponent {
   constructor(private router: Router) {
     this.navLinks = [
       {
-        label: 'Home',
-        link: './home',
-        index: 0
-      },{
         label: 'Branch Orders',
         link: './branch-order',
-        index: 1
+        index: 0
       },{
         label: 'Customer Orders',
         link: './customer-order',

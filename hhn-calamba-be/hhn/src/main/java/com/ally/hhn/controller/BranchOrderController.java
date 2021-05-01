@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ally.hhn.model.BranchOrder;
-import com.ally.hhn.model.BranchOrderDTO;
-import com.ally.hhn.model.Promo;	
+import com.ally.hhn.model.BranchOrderDTO;	
 import com.ally.hhn.service.BranchOrderService;
 
 @RestController
@@ -41,7 +40,7 @@ public class BranchOrderController {
 	@PostMapping("/deleteBranchOrderData")
 	public ResponseEntity<JSONObject> deleteBranchOrderData(@RequestBody BranchOrder branchOrder) {
 		branchOrderService.delete(branchOrder);
-		return getBranchOrderTableData(0, "deliveryDate", "asc", 5, "");
+		return getBranchOrderTableData(0, "deliveryDate", "asc", 5, "true");
 	}
 	
 	@PostMapping("/getBranchOrderItemData")
@@ -53,7 +52,7 @@ public class BranchOrderController {
 	
 	@PostMapping("/changeStatus")
 	public ResponseEntity<JSONObject> changeStatus(@RequestBody BranchOrder branchOrder) {
-		BranchOrder response = branchOrderService.changeStatus(branchOrder);
+		branchOrderService.changeStatus(branchOrder);
 		return getBranchOrderTableData(0, "deliveryDate", "asc", 5, "true");
 		
 	}

@@ -1,9 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomerData } from 'src/app/model/customer-data';
 import { CustomerOrderItemData } from 'src/app/model/customer-order-item-data';
 import { CustomerService } from 'src/app/services/customer-service';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-view-order',
@@ -15,6 +16,10 @@ export class ViewOrderComponent implements OnInit {
   customerOrderItems: CustomerOrderItemData[] = [];
   customer: CustomerData;
   isDiscounted: boolean = false;
+
+  @ViewChild('screen') screen: ElementRef;
+  @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('downloadLink') downloadLink: ElementRef;
   constructor(public dialogRef: MatDialogRef<ViewOrderComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private customerService: CustomerService,
@@ -61,4 +66,12 @@ export class ViewOrderComponent implements OnInit {
     })
   }
 
+  printSalesInvoice(){
+    html2canvas(this.screen.nativeElement).then(canvas => {
+      this.canvas.nativeElement.src = canvas.toDataURL();
+      this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+      this.downloadLink.nativeElement.download = 'salesInvoice_'+this.customer.name+'.png';
+      this.downloadLink.nativeElement.click();
+    });
+  }
 }

@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.ally.hhn.model.BranchOrderItem;
-import com.ally.hhn.model.PromoItem;
 
 @Repository
 public interface BranchOrderItemRepository extends JpaRepository<BranchOrderItem, Integer>{

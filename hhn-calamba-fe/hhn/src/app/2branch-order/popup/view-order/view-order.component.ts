@@ -25,12 +25,12 @@ export class ViewOrderComponent implements OnInit {
     })
   }
 
-  changeStatus(status: String){
+  changeStatus(status: String) {
     let msg = "";
-    if(status === 'PAY'){
+    if (status === 'PAY') {
       this.data.paid = true;
       msg = "Payment Recorded!";
-    }else{
+    } else {
       this.data.delivered = true
       msg = "Order Received!";
     }
@@ -40,5 +40,12 @@ export class ViewOrderComponent implements OnInit {
       this._snackBar.open(msg, "Close");
     })
   }
-  
+
+  cancelOrder() {
+    let msg = "This Order has been cancelled"
+    this.branchOrderService.deleteBranchOrderData(this.data).subscribe(result => {
+      this.branchOrderService.setBoList(result);
+      this._snackBar.open(msg, "Close");
+    })
+  }
 }

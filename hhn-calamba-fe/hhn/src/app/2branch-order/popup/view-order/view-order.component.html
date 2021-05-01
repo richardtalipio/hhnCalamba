@@ -40,6 +40,9 @@
         </button>&nbsp;
         <button mat-raised-button color="primary" [disabled]="data.delivered" (click)="changeStatus('DELIVER')" [mat-dialog-close]="true">
             DELIVER
+        </button>&nbsp;
+        <button mat-raised-button color="warn" [disabled]="data.paid" (click)="cancelOrder()" [mat-dialog-close]="true">
+            CANCEL ORDER
         </button>
         <br>
     </div>

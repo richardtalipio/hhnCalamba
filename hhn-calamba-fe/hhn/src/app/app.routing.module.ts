@@ -8,12 +8,13 @@ import { BranchOrderComponent } from "./2branch-order/branch-order.component";
 import { CustomerOrderComponent } from "./3customer-order/customer-order.component";
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+ 
   { path: 'branch-order', loadChildren: () => import('./2branch-order/branch-order.module').then(m => m.BranchOrderModule)  },
   { path: 'customer-order', loadChildren: () => import('./3customer-order/customer-order.module').then(m => m.CustomerOrderModule)  },
   { path: 'products', loadChildren: () => import('./4product/product.module').then(m => m.ProductModule) },
-  { path: '**', component: NotFoundComponent }
+  { path: '', redirectTo: '/branch-order', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent },
+  
 ];
 
 @NgModule({

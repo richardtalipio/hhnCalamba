@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.ally.hhn.model.Item;
 import com.ally.hhn.model.Promo;
 import com.ally.hhn.model.PromoDTO;
 import com.ally.hhn.service.PromoService;
@@ -46,7 +44,7 @@ public class PromoController {
 	}
 	
 	@PostMapping("/togglePromo")
-	public ResponseEntity togglePromo(@RequestBody Promo promo) {
+	public ResponseEntity<JSONObject> togglePromo(@RequestBody Promo promo) {
 		try {
 			promoService.save(promo);
 			return new ResponseEntity<JSONObject>(new HttpHeaders(), HttpStatus.OK);

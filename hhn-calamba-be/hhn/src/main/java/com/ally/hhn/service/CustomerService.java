@@ -4,18 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.sql.Date;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import com.ally.hhn.model.BranchOrder;
-import com.ally.hhn.model.BranchOrderItem;
-import com.ally.hhn.model.BranchOrderItemDTO;
 import com.ally.hhn.model.Customer;
 import com.ally.hhn.model.CustomerOrder;
 import com.ally.hhn.model.CustomerOrderDTO;

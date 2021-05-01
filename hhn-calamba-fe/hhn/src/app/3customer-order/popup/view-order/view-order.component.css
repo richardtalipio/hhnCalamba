@@ -30,3 +30,7 @@
     border: solid 4px;
     border-color: #3d643d;
 }
+
+#download{
+    display: none;
+}
